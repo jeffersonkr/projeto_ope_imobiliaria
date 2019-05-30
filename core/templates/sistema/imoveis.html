@@ -1,0 +1,245 @@
+{% extends "sistema/home-sistema.html" %}
+{% block content %}
+
+<section class="content-header">
+    <h1>
+        Gestão Imóveis
+        <small>Cadastro</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Cadastro</a></li>
+        <li class="active">Imóveis</li>
+    </ol>
+</section><br><br>
+
+<div class="box">
+    <div class="box-header">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-incluir-imovel">Incluir novo imóvel</button>
+        </div>
+    </div>
+
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Matricula</th>
+                    <th>Descrição</th>
+                    <th>IPTU</th>
+                    <th>m²</th>
+                    <th>Proprietario</th>
+                    <th>Cliente</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>UF</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for imovel in imoveis %}
+                    <tr>
+                        {% for key, values in imovel.items %}
+                        <td>{{ values }}</td>
+                        {% endfor %}
+                        
+                        <td>
+                            {% for key, value in imovel.items %}
+                                {% if key == 'id' %}
+                                    <a href="#" onclick="clickUpdateImovel('{{ value }}')" id_imovel="{{ value }}" data-toggle="modal" data-target="#modal-alterar-imovel"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#" id_imovel="{{ value }}" onclick="clickDeleteImovel('{{ value }}');" data-toggle="modal" data-target="#modal-excluir-imovel" class='excluir-cliente'>
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<!-- modal-cadastro de clientes -->
+<div class="modal fade" id="modal-incluir-imovel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Incluir novo imovel</h4>
+            </div>
+
+            <form id="form-imovel" action="" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>DADOS DO IMÓVEL</legend>
+                        <div class="col-md-8"><textarea name="descricao" class="form-control" placeholder="Descrição"></textarea></div>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <select name="id_proprietario" class="form-control" placeholder="Proprietário">
+                                <option selected disabled>Nome proprietário</option>
+                                {% for i in proprietarios %}
+                                    {% for key, value in i.items %}
+                                        {% if "id" == key %}
+                                            <option value="{{ value }}">
+                                        {% endif %}
+                                                {% if "nome_proprietario" == key %}
+                                                    {{ value }}</option>
+                                                {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <select name="id_cliente" class="form-control">
+                                <option selected disabled>Nome Cliente</option>
+                                {% for i in clientes %}
+                                    {% for key, value in i.items %}
+                                        {% if "id" == key %}
+                                            <option value="{{ value }}">
+                                        {% endif %}
+                                                {% if "nome_cliente" == key %}
+                                                    {{ value }}</option>
+                                                {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4"><input name="matricula" class="form-control" type="text" placeholder="Matrícula"></div>
+                        <div class="col-md-4"><input name="iptu" class="form-control" type="text" placeholder="IPTU"></div>
+                        <div class="col-md-4"><input name="metro_quadrado" class="form-control" type="text" placeholder="Metros quadrados"></div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>ENDEREÇO</legend>
+                        <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
+                        <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
+                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP">
+                        </div>
+                        <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
+                            placeholder="Cidade"></div>
+                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button id="btn-cad-cliente" type="submit" class="btn btn-primary">Incluir</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- modal-excluir cliente -->
+<div class="modal fade" id="modal-excluir-imovel" id_imovel="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Exluir imóvel</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                <button type="button" id="btn-delete-imovel" class="btn btn-primary">Sim</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- modal-cadastro de clientes -->
+<div class="modal fade" id="modal-alterar-imovel" id_imovel="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Alterar cliente</h4>
+            </div>
+            <form id="form-imovel">
+                <div class="modal-body">
+                    <fieldset>
+                            <legend>DADOS DO IMÓVEL</legend>
+                            <div class="col-md-8">
+                                <textarea id="descricao" name="descricao" class="form-control" placeholder="Descrição"></textarea>
+                            </div>
+                            <div class="col-md-4" style="padding-bottom: 4px;" >
+                                <select id="id_proprietario" name="id_proprietario" class="form-control">
+                                    <option selected disabled>Nome proprietário</option>
+                                    {% for i in proprietarios %}
+                                        {% for key, value in i.items %}
+                                            {% if "id" == key %}
+                                                <option value="{{ value }}">
+                                            {% endif %}
+                                                    {% if "nome_proprietario" == key %}
+                                                        {{ value }}</option>
+                                                    {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-4" style="padding-bottom: 4px;" >
+                                <select id="id_cliente" name="id_cliente" class="form-control">
+                                    <option selected disabled>Nome Cliente</option>
+                                    {% for i in clientes %}
+                                        {% for key, value in i.items %}
+                                            {% if "id" == key %}
+                                                <option value="{{ value }}">
+                                            {% endif %}
+                                                    {% if "nome_cliente" == key %}
+                                                        {{ value }}</option>
+                                                    {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-4"><input id="matricula" name="matricula" class="form-control" type="text" placeholder="Matrícula" disabled></div>
+                            <div class="col-md-4"><input id="iptu" name="iptu" class="form-control" type="text" placeholder="IPTU"></div>
+                            <div class="col-md-4"><input id="metro_quadrado" name="metros" class="form-control" type="text" placeholder="Metros quadrados"></div>
+                        </fieldset>
+                        <fieldset style="margin-top: 20px;">
+                            <legend>ENDEREÇO</legend>
+                            <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
+                            <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
+                            <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP">
+                            </div>
+                            <div class="col-md-7" style="margin-top: 10px;"><input id="cidade" name="cidade" class="form-control" type="text"
+                                placeholder="Cidade"></div>
+                            <div class="col-md-2" style="margin-top: 10px;"><input id="uf" name="uf" class="form-control" type="text" placeholder="UF">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                        <button id="btn-atualizar-imovel" class="btn btn-primary">Alterar</button>
+                    </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+{% endblock content %}

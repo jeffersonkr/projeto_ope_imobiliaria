@@ -1,0 +1,155 @@
+{% extends "sistema/base-sistema.html" %}
+{% load static %}
+{% block conteudo-sistema %}
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">SK</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>SK Imóveis</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">perfil</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <!-- User image -->
+                                <li class="user-header">
+
+
+                                    <p>
+                                        <small>perfil</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Editar</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'logout' %}" class="btn btn-default btn-flat">Sair</a>
+                                        {% else %}
+                                        <a href="#" class="btn btn-default btn-flat">Logar</a>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MENU</li>
+
+                    <li>
+                        <a href="{% url 'home-sistema' %}">
+                            <i class="fa fa-th"></i> <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="{% url 'cadastro' %}">
+                            <i class="fa fa-th"></i>
+                            <span>Cadastro</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                
+                            <li>
+                                <a href="{% url 'cadastro-clientes' %}">
+                                    <i class="fa fa-th"></i> <span>Clientes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'cadastro-imoveis' %}">
+                                    <i class="fa fa-th"></i> <span>Imóveis</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'cadastro-corretores' %}">
+                                    <i class="fa fa-th"></i> <span>Corretores</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'cadastro-proprietarios' %}">
+                                    <i class="fa fa-th"></i> <span>Proprietários</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'cadastro-usuarios' %}">
+                                    <i class="fa fa-th"></i> <span>Usuários</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!--
+                    <li>
+                    <a href="pages/calendar.html">
+                        <i class="fa fa-calendar"></i> <span>Relatorios</span>
+                    </a>
+                    </li>-->
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <section class="content">
+                {% block content %}
+                {% endblock content %}
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+</body>
+{% endblock conteudo-sistema %}

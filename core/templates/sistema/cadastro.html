@@ -1,0 +1,103 @@
+{% extends "sistema/home-sistema.html" %}
+{% block content %}
+
+<section class="content-header">
+  <h1>
+    Sistema de Gestão Imobiliaria
+    <small>Cadastro</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Cadastro</li>
+  </ol>
+</section><br><br>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>Clientes</h3>
+
+        <p>Clique no botão abaixo para iniciar o cadastros de novos clientes</p>
+      </div>
+
+      <a href="{% url 'cadastro-clientes' %}" class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>Imoveis</h3>
+
+        <p>Clique no botão abaixo para iniciar o cadastros de novos imoveis</p>
+      </div>
+
+      <a href="{% url 'cadastro-imoveis' %}"  class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>Corretores</h3>
+
+        <p>Clique no botão abaixo para iniciar o cadastros de novos corretores</p>
+      </div>
+
+      <a href="{% url 'cadastro-corretores' %}" data-toggle="modal" class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>Proprietários</h3>
+
+        <p>Clique no botão abaixo para iniciar o cadastros de novos propietario</p>
+      </div>
+
+      <a href="{% url 'cadastro-proprietarios' %}" data-toggle="modal" class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>Usuarios</h3>
+
+        <p>Clique no botão abaixo para iniciar o cadastros de novos usuarios</p>
+      </div>
+
+      <a href="#" data-toggle="modal" class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-4">
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>Boletos</h3>
+  
+          <p>Clique no botão abaixo para acessar aos relatórios e boletos.</p>
+        </div>
+  
+        <a href="#" data-toggle="modal" class="small-box-footer">Abrir formulario de
+          cadastro <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+</div>
+
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+{% endblock content %}

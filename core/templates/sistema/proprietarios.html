@@ -1,0 +1,184 @@
+{% extends "sistema/home-sistema.html" %}
+{% block content %}
+
+<section class="content-header">
+    <h1>
+        Gestão Proprietários
+        <small>Cadastro</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Gestão</a></li>
+        <li class="active">Proprietários</li>
+    </ol>
+</section><br><br>
+
+<div class="box">
+    <div class="box-header">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-proprietario">Incluir novo proprietario</button>
+        </div>
+    </div>
+
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>UF</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proprietario in proprietarios %}
+                    <tr>
+                        {% for key, values in proprietario.items %}
+                        <td>{{ values }}</td>
+                        {% endfor %}
+                        
+                        <td>
+                            {% for key, value in proprietario.items %}
+                                {% if key == 'id' %}
+                                    <a href="#" onclick="clickUpdateProprietario('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-proprietario"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#" id_proprietario="{{ value }}" onclick="clickDeleteProprietario('{{ value }}');" data-toggle="modal" data-target="#modal-excluir-proprietario" class='excluir-cliente'>
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<!-- modal-cadastro de clientes -->
+<div class="modal fade" id="modal-proprietario">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Incluir novo proprietario</h4>
+            </div>
+
+            <form id="form-cliente" action="" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>DADOS PESSOAIS</legend>
+                        <div id=cpf-error-incluir></div>
+                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome" maxlength="100"></div>
+                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF" maxlength="11"/></div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>ENDEREÇO</legend>
+                        <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
+                        <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
+                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP" maxlength="9">
+                        </div>
+                        <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
+                            placeholder="Cidade" maxlength="40"></div>
+                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF"maxlength="2">
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>CONTATO</legend>
+                        <div class="col-md-8"><input name="email" class="form-control" type="email" placeholder="E-mail"></div>
+                        <div class="col-md-4"><input name="telefone" class="form-control" type="tel" placeholder="Telefone" maxlength="13"></div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button id="btn-cad-cliente" type="submit" class="btn btn-primary">Incluir</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- modal-excluir cliente -->
+<div class="modal fade" id="modal-excluir-proprietario" id_proprietario="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Excluir proprietario</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente exluir</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                <button type="button" id="btn-delete-proprietario" class="btn btn-primary">Sim</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- modal-cadastro de clientes -->
+<div class="modal fade" id="modal-alterar-proprietario" id_proprietario="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Alterar proprietario</h4>
+            </div>
+            <form id="form-proprietario" action="" method="">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>DADOS PESSOAIS</legend>
+                        <div id=cpf-error-alterar></div>
+                        <div class="col-md-8"><input id="nome" name="nome" class="form-control" type="text" placeholder="Nome"></div>
+                        <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>ENDEREÇO</legend>
+                        <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
+                        <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro" maxlength="35"></div>
+                        <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP">
+                        </div>
+                        <div class="col-md-7" style="margin-top: 10px;"><input id="cidade" name="cidade" class="form-control" type="text"
+                            placeholder="Cidade"></div>
+                        <div class="col-md-2" style="margin-top: 10px;"><input id="uf" name="uf" class="form-control" type="text" placeholder="UF">
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>CONTATO</legend>
+                        <div class="col-md-8"><input id="email" name="email" class="form-control" type="email" placeholder="E-mail"></div>
+                        <div class="col-md-4"><input id="tel" name="telefone" class="form-control" type="tel" placeholder="Telefone"></div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button id="btn-atualizar-proprietario" type="button" class="btn btn-primary">Alterar</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+{% endblock content %}
