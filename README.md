@@ -12,7 +12,7 @@ proprietários e outros.
 Supondo que python3 e pip esteja instalado no servidor:
  - Clonando o projeto para o servidor: `git clone <url-repositorio>`
  - Dentro do diretorio clonado instalamos as dependências: `pip install -r requirements.txt`
- - Migrando os dados para o banco de dados: `python manage.py migrate`
+ - Migrando os dados, tabelas, para o banco de dados: `python manage.py migrate`
  - Executando o servidor django: `python manage.py runserver`
 
 ### REST API: End-Points
