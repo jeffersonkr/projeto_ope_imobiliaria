@@ -1,5 +1,7 @@
-projeto_ope_imobiliaria
-========================
+[![Build Status](https://travis-ci.com/jeffersonkr/projeto_ope_imobiliaria.svg?branch=master)](https://travis-ci.com/jeffersonkr/projeto_ope_imobiliaria)
+
+Projeto Imobiliária (OPE)
+=========================
 
 Projeto de sistema Imobiliária que busca facilitar o cotidiano do corretor e da imobiliária
 na gestao dos imoveis, na parte administrativa, financeira e de venda.
