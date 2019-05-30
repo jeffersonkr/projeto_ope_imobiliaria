@@ -160,4 +160,4 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
-URL_API = "http://localhost/api/"
+URL_API = "http://localhost:8000/api/"
