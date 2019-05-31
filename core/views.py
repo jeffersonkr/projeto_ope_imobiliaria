@@ -86,30 +86,44 @@ def atualizar_view_proprietario(request, pk):
     return JsonResponse(proprietario)
 
 
+def get_token(request):
+    url = settings.URL_API + f"token/"
+    response = requests.api.post(url, data={
+        'username': settings.LOGIN_API,
+        'password': settings.PASSWORD_API
+    }).json()
+
+    return {'Authorization': 'Bearer ' + response['access']}
+
+
 def delete_cliente(request, pk):
+    headers = get_token(request)
     url = settings.URL_API + f"cliente/{pk}"
-    requests.api.delete(url)
+    requests.api.delete(url, headers=headers)
 
     return redirect('/cadastro/clientes')
 
 
 def delete_corretor(request, pk):
+    headers = get_token(request)
     url = settings.URL_API + f"corretor/{pk}"
-    requests.api.delete(url)
+    requests.api.delete(url, headers=headers)
 
     return redirect('/cadastro/corretores')
 
 
 def delete_imovel(request, pk):
+    headers = get_token(request)
     url = settings.URL_API + f"imovel/{pk}"
-    requests.api.delete(url)
+    requests.api.delete(url, headers=headers)
 
     return redirect('/cadastro/imoveis')
 
 
 def delete_proprietario(request, pk):
+    headers = get_token(request)
     url = settings.URL_API + f"proprietario/{pk}"
-    requests.api.delete(url)
+    requests.api.delete(url, headers=headers)
 
     return redirect('/cadastro/proprietarios')
 
@@ -139,9 +153,8 @@ def cadastro_clientes(request):
         cliente['inquilino'] = request.POST.get("inquilino", "") == "on"
 
         retorno_api = requests.api.post(url, json=cliente)
-        print(retorno_api)
 
-        if retorno_api.status_code == 200:
+        if retorno_api.status_code == 201:
             return redirect('/cadastro/clientes')
         else:
             HttpResponse("erro cadastramento de cliente")
