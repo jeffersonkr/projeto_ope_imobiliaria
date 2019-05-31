@@ -9,15 +9,19 @@ from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
 
+
 def home(request):
     return render(request, 'index.html')
+
 
 def sair(request):
     logout(request)
     return redirect('/')
 
+
 def registrar(request):
     return redirect('/')
+
 
 def home_sistema(request):
     url = settings.URL_API + "imovel/"
@@ -25,22 +29,27 @@ def home_sistema(request):
 
     contexto = {
         'imoveis': todos_imoveis
-    } 
-    
+    }
+
     return render(request, 'sistema/index.html', contexto)
+
 
 def cadastro(request):
     return render(request, 'sistema/cadastro.html')
+
 
 def login_page(request):
     context = {
         'error_msg': ''
     }
-    
+
     if request.user.is_authenticated:
         return redirect(settings.LOGIN_REDIRECT_URL)
 
     if request.method == "POST":
+        if not request.POST.get('remember_me', None):
+            request.session.set_expiry(0)
+
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
@@ -54,8 +63,6 @@ def login_page(request):
             return render(request, 'login.html', context)
 
     return render(request, 'login.html', context)
-           
-           
 
 
 def atualizar_view_cliente(request, pk):
@@ -64,11 +71,13 @@ def atualizar_view_cliente(request, pk):
 
     return JsonResponse(cliente)
 
+
 def atualizar_view_imovel(request, pk):
     url_imovel = settings.URL_API + f"imovel/{pk}"
     imovel = requests.api.get(url_imovel).json()
-    
+
     return JsonResponse(imovel)
+
 
 def atualizar_view_proprietario(request, pk):
     url_proprietario = settings.URL_API + f"proprietario/{pk}"
@@ -76,11 +85,13 @@ def atualizar_view_proprietario(request, pk):
 
     return JsonResponse(proprietario)
 
+
 def delete_cliente(request, pk):
     url = settings.URL_API + f"cliente/{pk}"
     requests.api.delete(url)
 
     return redirect('/cadastro/clientes')
+
 
 def delete_corretor(request, pk):
     url = settings.URL_API + f"corretor/{pk}"
@@ -88,17 +99,20 @@ def delete_corretor(request, pk):
 
     return redirect('/cadastro/corretores')
 
+
 def delete_imovel(request, pk):
     url = settings.URL_API + f"imovel/{pk}"
     requests.api.delete(url)
 
     return redirect('/cadastro/imoveis')
 
+
 def delete_proprietario(request, pk):
     url = settings.URL_API + f"proprietario/{pk}"
     requests.api.delete(url)
 
     return redirect('/cadastro/proprietarios')
+
 
 def cadastro_clientes(request):
     url = settings.URL_API + "cliente/"
@@ -128,6 +142,7 @@ def cadastro_clientes(request):
 
     return render(request, 'sistema/clientes.html', context)
 
+
 def cadastro_proprietario(request):
     url = settings.URL_API + "proprietario/"
     todos_proprietarios = requests.api.get(url).json()
@@ -155,13 +170,14 @@ def cadastro_proprietario(request):
             return redirect('/cadastro/proprietarios')
         else:
             HttpResponse("erro cadastramento de cliente")
-        
+
     return render(request, 'sistema/proprietarios.html', context)
+
 
 def cadastro_corretores(request):
     url = settings.URL_API + "corretor/"
     todos_corretores = requests.api.get(url).json()
-        
+
     context = {
         'corretores': todos_corretores
     }
@@ -186,6 +202,7 @@ def cadastro_corretores(request):
 
     return render(request, 'sistema/corretores.html', context)
 
+
 def cadastro_imoveis(request):
     url = settings.URL_API + "imovel/"
     todos_imoveis = requests.api.get(url).json()
@@ -193,13 +210,12 @@ def cadastro_imoveis(request):
     todos_proprietarios = requests.api.get(url_proprietario).json()
     url_cliente = settings.URL_API + "cliente/"
     todos_clientes = requests.api.get(url_cliente).json()
-    
+
     contexto = {
         'proprietarios': todos_proprietarios,
         'clientes': todos_clientes,
         'imoveis': todos_imoveis
     }
-
 
     if request.method == "POST":
         imovel = {}
@@ -229,8 +245,8 @@ def send_email(request):
         contexto = {
             'name': request.POST.get('name', ''),
             'subject': subject,
-            'from_email' : from_email,
-            'message' : message
+            'from_email': from_email,
+            'message': message
         }
         if subject and message and from_email:
             template_name = 'contatoEmail.html'
