@@ -60,7 +60,7 @@ def login_page(request):
             context = {
                 'error_msg': 'Senha e/ou usuário inválido.'
             }
-            return render(request, 'login.html', context)
+            return render(request, 'sistema/login.html', context)
 
     return render(request, 'login.html', context)
 
