@@ -145,18 +145,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
-
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
 # auth
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/sistema/'
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/sistema/'
 
 
 # Email Settings
@@ -167,17 +160,7 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-    )
-}
+URL_API = "http://localhost:8000/api/"
 
-
-LOGIN_URL = "/login/"
-LOGIN_URL_REDIRECT = "/"
-
-URL_API = "http://lucascanhaleite.pythonanywhere.com/api/"
+# Cookie session
+SESSION_COOKIE_AGE = 60 * 60 * 24

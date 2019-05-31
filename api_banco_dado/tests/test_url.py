@@ -19,3 +19,19 @@ class TestUrls:
     def test_corretor_list(self):
         path = reverse('corretor_list')
         assert resolve(path).view_name == 'corretor_list'
+
+    def test_cliente_detail(self):
+        path = reverse('cliente_detail', args=[1])
+        assert resolve(path).view_name == 'cliente_detail'
+
+    def test_imovel_detail(self):
+        path = reverse('imovel_detail', args=[1])
+        assert resolve(path).view_name == 'imovel_detail'
+
+    def test_proprietario_detail(self):
+        path = reverse('proprietario_detail', args=[1])
+        assert resolve(path).view_name == 'proprietario_detail'
+
+    def test_corretor_detail(self):
+        path = reverse('corretor_detail', args=[1])
+        assert resolve(path).view_name == 'corretor_detail'
