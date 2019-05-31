@@ -149,7 +149,7 @@ ALLOWED_HOSTS = ['*']
 
 # auth
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/sistema/'
+LOGIN_URL_REDIRECT = '/sistema/'
 
 
 # Email Settings
