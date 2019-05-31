@@ -160,36 +160,37 @@
             <form id="form-cliente" action="" method="">
                 {% csrf_token %}
                 <div class="modal-body">
-                    <legend>DADOS PESSOAIS</legend>
+                    <fieldset>
+                        <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
-                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome Completo" required disabled></div>
+                        <div class="col-md-8"><input name="nome" id="nome" class="form-control" type="text" placeholder="Nome Completo" required disabled></div>
                         <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF" required disabled></div>
-                        <div class="col-md-4"><input name="rg" class="form-control" type="text" placeholder="RG" required disabled></div>
+                        <div class="col-md-4"><input name="rg" id="rg" class="form-control" type="text" placeholder="RG" required disabled></div>
                         <div class="col-md-8"><input id="cnpj" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
                         <div class="col-md-8">
                             <div class="form-check form-check-inline">
-                                <input id="pessoa_juridica_true" name="pj" class="form-check-input" type="checkbox" value="true" disabled>
+                                <input id="pj" name="pj" class="form-check-input" type="checkbox" value="true" disabled>
                                 <label class="form-check-label" for="pessoa_juridica_true">Pessoa Jurídica</label>
-                                <input id="inquilino_true" name="inquilino" class="form-check-input" type="checkbox" value="true">
+                                <input id="inquilino" name="inquilino" class="form-check-input" type="checkbox" value="true">
                                 <label class="form-check-label" for="inquilino_true">Inquilino</label>
                             </div>
                         </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
-                        <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro" required></div>
-                        <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro" required></div>
-                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP" required>
+                        <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro" required></div>
+                        <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro" required></div>
+                        <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP" required>
                         </div>
-                        <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
+                        <div class="col-md-7" style="margin-top: 10px;"><input id="cidade" name="cidade" class="form-control" type="text"
                             placeholder="Cidade" required></div>
-                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF" required>
+                        <div class="col-md-2" style="margin-top: 10px;"><input id="uf" name="uf" class="form-control" type="text" placeholder="UF" required>
                         </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>CONTATO</legend>
-                        <div class="col-md-8"><input name="email" class="form-control" type="email" placeholder="E-mail" required></div>
-                        <div class="col-md-4"><input name="telefone" class="form-control" type="tel" placeholder="Telefone" required></div>
+                        <div class="col-md-8"><input id="email" name="email" class="form-control" type="email" placeholder="E-mail" required></div>
+                        <div class="col-md-4"><input id="tel" name="telefone" class="form-control" type="tel" placeholder="Telefone" required></div>
                     </fieldset>
                 </div>
                 <div class="modal-footer">

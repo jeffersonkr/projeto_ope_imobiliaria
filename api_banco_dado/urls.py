@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework_simplejwt import views as jwt_views
 from api_banco_dado import views
 
 urlpatterns = [
@@ -13,4 +14,8 @@ urlpatterns = [
          name="proprietario_list"),
     path('proprietario/<int:pk>', views.ProprietarioDetail.as_view(),
          name="proprietario_detail"),
+    path('token/', jwt_views.TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
 ]
