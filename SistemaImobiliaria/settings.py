@@ -161,3 +161,6 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
 URL_API = "http://localhost:8000/api/"
+
+# Cookie session
+SESSION_COOKIE_AGE = 60 * 60 * 24
