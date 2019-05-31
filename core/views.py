@@ -124,8 +124,10 @@ def cadastro_clientes(request):
 
     if request.method == "POST":
         cliente = {}
-        cliente['nome_cliente'] = request.POST.get("nome")
-        cliente['cpf_cnpj'] = request.POST.get("cpf")
+        cliente['nome'] = request.POST.get("nome")
+        cliente['cpf'] = request.POST.get("cpf")
+        cliente['rg'] = request.POST.get("rg")
+        cliente['cnpj'] = request.POST.get("cnpj")
         cliente['endereco'] = request.POST.get("endereco")
         cliente['bairro'] = request.POST.get("bairro")
         cliente['cep'] = request.POST.get("cep")
@@ -133,8 +135,12 @@ def cadastro_clientes(request):
         cliente['uf'] = request.POST.get("uf")
         cliente['email'] = request.POST.get("email")
         cliente['telefone'] = request.POST.get("telefone")
-        url = settings.URL_API + "cliente/"
-        retorno_api = requests.api.post(url, json=cliente).json()
+        cliente['pessoa_juridica'] = request.POST.get("pj", "") == "on"
+        cliente['inquilino'] = request.POST.get("inquilino", "") == "on"
+
+        retorno_api = requests.api.post(url, json=cliente)
+        print(retorno_api)
+
         if retorno_api.status_code == 200:
             return redirect('/cadastro/clientes')
         else:
