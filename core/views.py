@@ -62,7 +62,7 @@ def login_page(request):
             }
             return render(request, 'sistema/login.html', context)
 
-    return render(request, 'login.html', context)
+    return render(request, 'sistema/login.html', context)
 
 
 def atualizar_view_cliente(request, pk):
