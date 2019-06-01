@@ -21,11 +21,11 @@
     </div>
 
     <!-- /.box-header -->
-    <div class="box-body">
-        <table id="example1" class="table table-bordered table-striped">
+    <div class="box-body text-center">
+        <table id="example1" class="table table-bordered table-striped text-center">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th >ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
                     <th>RG</th>
@@ -46,7 +46,28 @@
                 {% for cliente in clientes %}
                     <tr>
                         {% for key, values in cliente.items %}
-                        <td>{{ values }}</td>
+                            {% if key == "cnpj" %}
+                                {% if values is none %}
+                                    <td> - </td>
+                                {% else %}
+                                    <td>{{ values }}</td>
+                                {% endif %}
+                            {% elif key == "pessoa_juridica" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% elif key == "inquilino" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% else %}
+                                <td>{{ values }}</td>
+                            {% endif %}
+
                         {% endfor %}
                         
                         <td>
