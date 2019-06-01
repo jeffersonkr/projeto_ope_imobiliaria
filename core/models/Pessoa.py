@@ -31,6 +31,7 @@ class Pessoa(models.Model):
         """Capitalize attributes and then save."""
 
         self.nome = self._capitalize_attributes(self.nome)
+        self.endereco = self._capitalize_attributes(self.endereco)
         self.bairro = self._capitalize_attributes(self.bairro)
         self.cidade = self._capitalize_attributes(self.cidade)
         self.uf = self.uf.upper()
