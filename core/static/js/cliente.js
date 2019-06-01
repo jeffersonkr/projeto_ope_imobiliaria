@@ -7,7 +7,7 @@ function clickUpdate(id) {
         $('input#nome').val(data["nome"]);
         $('input#cpf-alterar').val(data["cpf"]);
         $('input#rg').val(data["rg"]);
-        $('input#cnpj').val(data["cnpj"]);
+        $('input#cnpj_alt').val(data["cnpj"]);
         $('input#endereco').val(data["endereco"]);
         $('input#bairro').val(data["bairro"]);
         $('input#cidade').val(data["cidade"]);
@@ -16,14 +16,14 @@ function clickUpdate(id) {
         $('input#email').val(data["email"]);
         $('input#tel').val(data["telefone"]);
         if (data["pessoa_juridica"] == true) {
-            $("#pj").prop("checked", true);
+            $("#pj_alt").prop("checked", true);
         } else {
-            $("#pj").prop("checked", false);
+            $("#pj_alt").prop("checked", false);
         }
         if (data["inquilino"] == true) {
-            $("#inquilino").prop("checked", true);
+            $("#inquilino_alt").prop("checked", true);
         } else {
-            $("#inquilino").prop("checked", false);
+            $("#inquilino_alt").prop("checked", false);
         }
     });
 };
@@ -38,9 +38,9 @@ $("#btn-atualizar-cliente").on("click", function () {
     var nome = $('input#nome').val();
     var cpf = $('input#cpf-alterar').val();
     var rg = $('input#rg').val();
-    var cnpj = $('input#cnpj').val();
-    var pj = $("#pj").is(":checked");
-    var inquilino = $("#inquilino").is(":checked");
+    var cnpj = $('input#cnpj_alt').val();
+    var pj = $("#pj_alt").is(":checked");
+    var inquilino = $("#inquilino_alt").is(":checked");
     var endereco = $('input#endereco').val();
     var bairro = $('input#bairro').val();
     var cidade = $('input#cidade').val();

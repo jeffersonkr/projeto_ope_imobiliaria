@@ -19,13 +19,12 @@
             <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default">Incluir novo cliente</button>
         </div>
     </div>
-
     <!-- /.box-header -->
-    <div class="box-body">
-        <table id="example1" class="table table-bordered table-striped">
+    <div class="box-body text-center">
+        <table id="example1" class="table table-bordered table-striped text-center">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th >ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
                     <th>RG</th>
@@ -46,7 +45,28 @@
                 {% for cliente in clientes %}
                     <tr>
                         {% for key, values in cliente.items %}
-                        <td>{{ values }}</td>
+                            {% if key == "cnpj" %}
+                                {% if values is none %}
+                                    <td> - </td>
+                                {% else %}
+                                    <td>{{ values }}</td>
+                                {% endif %}
+                            {% elif key == "pessoa_juridica" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% elif key == "inquilino" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% else %}
+                                <td>{{ values }}</td>
+                            {% endif %}
+
                         {% endfor %}
                         
                         <td>
@@ -89,9 +109,9 @@
                         <div class="col-md-8"><input id="cnpj" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
                         <div class="col-md-8">
                             <div class="form-check form-check-inline">
-                                <input id="pessoa_juridica_true" class="form-check-input" type="checkbox" value="pj_true">
+                                <input id="pj" name="pj" class="form-check-input" type="checkbox" value="pj_true">
                                 <label class="form-check-label" for="pessoa_juridica_true">Pessoa Jurídica</label>
-                                <input id="inquilino_true" class="form-check-input" type="checkbox" value="inquilino_true">
+                                <input id="inquilino" name="inquilino" class="form-check-input" type="checkbox" value="inquilino_true">
                                 <label class="form-check-label" for="inquilino_true">Inquilino</label>
                             </div>
                         </div>
@@ -166,12 +186,12 @@
                         <div class="col-md-8"><input name="nome" id="nome" class="form-control" type="text" placeholder="Nome Completo" required disabled></div>
                         <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF" required disabled></div>
                         <div class="col-md-4"><input name="rg" id="rg" class="form-control" type="text" placeholder="RG" required disabled></div>
-                        <div class="col-md-8"><input id="cnpj" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
+                        <div class="col-md-8"><input id="cnpj_alt" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
                         <div class="col-md-8">
                             <div class="form-check form-check-inline">
-                                <input id="pj" name="pj" class="form-check-input" type="checkbox" value="true" disabled>
+                                <input id="pj_alt" name="pj" class="form-check-input" type="checkbox" value="true" disabled>
                                 <label class="form-check-label" for="pessoa_juridica_true">Pessoa Jurídica</label>
-                                <input id="inquilino" name="inquilino" class="form-check-input" type="checkbox" value="true">
+                                <input id="inquilino_alt" name="inquilino" class="form-check-input" type="checkbox" value="true">
                                 <label class="form-check-label" for="inquilino_true">Inquilino</label>
                             </div>
                         </div>

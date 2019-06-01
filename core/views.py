@@ -149,13 +149,15 @@ def cadastro_clientes(request):
         cliente['uf'] = request.POST.get("uf")
         cliente['email'] = request.POST.get("email")
         cliente['telefone'] = request.POST.get("telefone")
-        cliente['pessoa_juridica'] = request.POST.get("pj", "") == "on"
-        cliente['inquilino'] = request.POST.get("inquilino", "") == "on"
+        cliente['pessoa_juridica'] = True if request.POST.get(
+            "pj") == "pj_true" else False
+        cliente['inquilino'] = True if request.POST.get(
+            "inquilino") == "inquilino_true" else False
 
         retorno_api = requests.api.post(url, json=cliente)
-
+        print(retorno_api.json())
         if retorno_api.status_code == 201:
-            return redirect('/cadastro/clientes')
+            return redirect('cadastro-clientes')
         else:
             HttpResponse("erro cadastramento de cliente")
 
