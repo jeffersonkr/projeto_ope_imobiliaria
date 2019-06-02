@@ -155,7 +155,7 @@ def cadastro_clientes(request):
             "inquilino") == "inquilino_true" else False
 
         retorno_api = requests.api.post(url, json=cliente)
-        print(retorno_api.json())
+
         if retorno_api.status_code == 201:
             return redirect('cadastro-clientes')
         else:
@@ -174,8 +174,10 @@ def cadastro_proprietario(request):
 
     if request.method == "POST":
         proprietario = {}
-        proprietario['nome_proprietario'] = request.POST.get("nome")
+        proprietario['nome'] = request.POST.get("nome")
         proprietario['cpf'] = request.POST.get("cpf")
+        proprietario['rg'] = request.POST.get("rg")
+        proprietario['cnpj'] = request.POST.get("cnpj")
         proprietario['endereco'] = request.POST.get("endereco")
         proprietario['bairro'] = request.POST.get("bairro")
         proprietario['cep'] = request.POST.get("cep")
@@ -183,11 +185,13 @@ def cadastro_proprietario(request):
         proprietario['uf'] = request.POST.get("uf")
         proprietario['email'] = request.POST.get("email")
         proprietario['telefone'] = request.POST.get("telefone")
+        proprietario['pessoa_juridica'] = True if request.POST.get(
+            "pj") == "pj_true" else False
 
         url = settings.URL_API + "proprietario/"
-        retorno_api = requests.api.post(url, json=proprietario).json()
+        retorno_api = requests.api.post(url, json=proprietario)
 
-        if retorno_api.status_code == 200:
+        if retorno_api.status_code == 201:
             return redirect('/cadastro/proprietarios')
         else:
             HttpResponse("erro cadastramento de cliente")

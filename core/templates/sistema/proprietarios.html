@@ -22,12 +22,14 @@
 
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered table-striped  text-center">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
+                    <th>RG</th>
+                    <th>CNPJ</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
@@ -35,6 +37,7 @@
                     <th>UF</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Pessoa Juridica</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -42,7 +45,27 @@
                 {% for proprietario in proprietarios %}
                     <tr>
                         {% for key, values in proprietario.items %}
-                        <td>{{ values }}</td>
+                            {% if key == "cnpj" %}
+                                {% if values is none %}
+                                    <td> - </td>
+                                {% else %}
+                                    <td>{{ values }}</td>
+                                {% endif %}
+                            {% elif key == "pessoa_juridica" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% elif key == "inquilino" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% else %}
+                                <td>{{ values }}</td>
+                            {% endif %}
                         {% endfor %}
                         
                         <td>
@@ -79,8 +102,16 @@
                     <fieldset>
                         <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
-                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome" maxlength="100"></div>
-                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF" maxlength="11"/></div>
+                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome Completo" required></div>
+                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF" required></div>
+                        <div class="col-md-4"><input name="rg" class="form-control" type="text" placeholder="RG" required></div>
+                        <div class="col-md-8"><input id="cnpj" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
+                        <div class="col-md-8">
+                            <div class="form-check form-check-inline">
+                                <input id="pj" name="pj" class="form-check-input" type="checkbox" value="pj_true">
+                                <label class="form-check-label" for="pessoa_juridica_true">Pessoa Jurídica</label>
+                            </div>
+                        </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
@@ -148,9 +179,17 @@
                 <div class="modal-body">
                     <fieldset>
                         <legend>DADOS PESSOAIS</legend>
-                        <div id=cpf-error-alterar></div>
-                        <div class="col-md-8"><input id="nome" name="nome" class="form-control" type="text" placeholder="Nome"></div>
-                        <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
+                        <div id=cpf-error-incluir></div>
+                        <div class="col-md-8"><input name="nome" id="nome" class="form-control" type="text" placeholder="Nome Completo" required disabled></div>
+                        <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF" required disabled></div>
+                        <div class="col-md-4"><input name="rg" id="rg" class="form-control" type="text" placeholder="RG" required disabled></div>
+                        <div class="col-md-8"><input id="cnpj_alt" name="cnpj" class="form-control" type="text" placeholder="CNPJ" required disabled></div>
+                        <div class="col-md-8">
+                            <div class="form-check form-check-inline">
+                                <input id="pj_alt" name="pj" class="form-check-input" type="checkbox" value="true" disabled>
+                                <label class="form-check-label" for="pessoa_juridica_true">Pessoa Jurídica</label>
+                            </div>
+                        </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
@@ -180,5 +219,4 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 {% endblock content %}
