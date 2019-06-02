@@ -22,14 +22,13 @@
 
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered table-striped text-center">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
-                    <th>Registro</th>
-                    <th>Clientes</th>
+                    <th>RG</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
@@ -37,6 +36,7 @@
                     <th>UF</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>CRECI</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -44,7 +44,7 @@
                 {% for corretor in corretores %}
                     <tr>
                         {% for key, values in corretor.items %}
-                        <td>{{ values }}</td>
+                            <td>{{ values }}</td>
                         {% endfor %}
                         
                         <td>
@@ -82,8 +82,8 @@
                         <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
                         <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome"></div>
-                        <div class="col-md-4"><input name="registro" class="form-control" type="text" placeholder="Nº registro"></div>
-                        <div class="col-md-8"><input name="id_clientes" class="form-control" type="text" placeholder="Id's clientes"></div>
+                        <div class="col-md-4"><input name="creci" class="form-control" type="text" placeholder="CRECI"></div>
+                        <div class="col-md-8"><input name="rg" class="form-control" type="text" placeholder="RG"></div>
                         <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
@@ -153,10 +153,10 @@
                     <fieldset>
                         <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
-                        <div class="col-md-8"><input id="nome" name="nome" class="form-control" type="text" placeholder="Nome"></div>
-                        <div class="col-md-8"><input id="registro" name="registro" class="form-control" type="text" placeholder="Nº registro"></div>
-                        <div class="col-md-8"><input id="id_clientes" name="id_clientes" class="form-control" type="text" placeholder="Id's clientes"></div>
-                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
+                        <div class="col-md-8"><input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" disabled></div>
+                        <div class="col-md-4"><input id="creci" name="creci" class="form-control" type="text" placeholder="CRECI"></div>
+                        <div class="col-md-8"><input id="rg" name="rg" class="form-control" type="text" placeholder="RG" disabled></div>
+                        <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF" disabled></div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
