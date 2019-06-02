@@ -196,7 +196,7 @@ class CorretorDetail(APIView):
 
     def get(self, request, pk, format=None):
         corretor = self.get_object(pk)
-        serializer = ImovelSerializer(corretor)
+        serializer = CorretorSerializer(corretor)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):

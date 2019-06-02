@@ -79,6 +79,13 @@ def atualizar_view_imovel(request, pk):
     return JsonResponse(imovel)
 
 
+def atualizar_view_corretor(request, pk):
+    url_corretor = settings.URL_API + f"corretor/{pk}"
+    corretor = requests.api.get(url_corretor).json()
+
+    return JsonResponse(corretor)
+
+
 def atualizar_view_proprietario(request, pk):
     url_proprietario = settings.URL_API + f"proprietario/{pk}"
     proprietario = requests.api.get(url_proprietario).json()
@@ -210,9 +217,9 @@ def cadastro_corretores(request):
     if request.method == "POST":
         corretor = {}
         corretor['nome'] = request.POST.get("nome")
-        corretor['registro'] = request.POST.get("registro")
-        corretor['id_clientes'] = request.POST.get("id_cliente")
-        corretor['cpf_cnpj'] = request.POST.get("cpf")
+        corretor['creci'] = request.POST.get("creci")
+        corretor['rg'] = request.POST.get("rg")
+        corretor['cpf'] = request.POST.get("cpf")
         corretor['endereco'] = request.POST.get("endereco")
         corretor['bairro'] = request.POST.get("bairro")
         corretor['cep'] = request.POST.get("cep")
@@ -220,10 +227,14 @@ def cadastro_corretores(request):
         corretor['uf'] = request.POST.get("uf")
         corretor['email'] = request.POST.get("email")
         corretor['telefone'] = request.POST.get("telefone")
-        url = settings.URL_API + "corretor/"
-        retorno_api = requests.api.post(url, json=corretor).json()
 
-        return redirect('/cadastro/corretores')
+        url = settings.URL_API + "corretor/"
+        retorno_api = requests.api.post(url, json=corretor)
+
+        if retorno_api.status_code == 201:
+            return redirect('/cadastro/corretores')
+        else:
+            HttpResponse("erro cadastramento de corretores")
 
     return render(request, 'sistema/corretores.html', context)
 
