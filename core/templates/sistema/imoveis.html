@@ -180,7 +180,7 @@
                                 <option selected disabled>Tipo de serviço</option>
                                 <option value="VE">Venda</option>
                                 <option value="AL">Aluguel</option>
-                                <option value="VE">Venda e Aluguel</option>
+                                <option value="VA">Venda e Aluguel</option>
                             </select>
                         </div>
                         <div class="col-md-6" style="padding-bottom: 4px;" >
@@ -194,13 +194,13 @@
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
-                        <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
-                        <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
-                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP">
+                        <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro" required></div>
+                        <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro" required></div>
+                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP" required>
                         </div>
                         <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
-                            placeholder="Cidade"></div>
-                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF">
+                            placeholder="Cidade" required></div>
+                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF" required>
                         </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
@@ -264,9 +264,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Alterar cliente</h4>
+                <h4 class="modal-title">Alterar imovel</h4>
             </div>
-            <form id="form-imovel">
+            <form id="form-imovel" method="" action="">
                 <div class="modal-body">
                     <fieldset>
                             <legend>DADOS DO IMÓVEL</legend>
@@ -274,14 +274,14 @@
                                 <textarea id="descricao" name="descricao" class="form-control" placeholder="Descrição"></textarea>
                             </div>
                             <div class="col-md-4" style="padding-bottom: 4px;" >
-                                <select id="id_proprietario" name="id_proprietario" class="form-control">
-                                    <option selected disabled>Nome proprietário</option>
+                            <select id="id_proprietario" name="id_proprietario" class="form-control" placeholder="Proprietário" required>
+                                <option selected disabled>Nome proprietário</option>
                                     {% for i in proprietarios %}
                                         {% for key, value in i.items %}
                                             {% if "id" == key %}
                                                 <option value="{{ value }}">
                                             {% endif %}
-                                                    {% if "nome_proprietario" == key %}
+                                                    {% if "nome" == key %}
                                                         {{ value }}</option>
                                                     {% endif %}
                                         {% endfor %}
@@ -290,14 +290,14 @@
                             </div>
 
                             <div class="col-md-4" style="padding-bottom: 4px;" >
-                                <select id="id_cliente" name="id_cliente" class="form-control">
-                                    <option selected disabled>Nome Cliente</option>
-                                    {% for i in clientes %}
+                                <select id="id_corretor" name="id_corretor" class="form-control">
+                                    <option selected disabled>Nome Corretor</option>
+                                    {% for i in corretores %}
                                         {% for key, value in i.items %}
                                             {% if "id" == key %}
                                                 <option value="{{ value }}">
                                             {% endif %}
-                                                    {% if "nome_cliente" == key %}
+                                                    {% if "nome" == key %}
                                                         {{ value }}</option>
                                                     {% endif %}
                                         {% endfor %}
@@ -305,25 +305,54 @@
                                 </select>
                             </div>
                             
-                            <div class="col-md-4"><input id="matricula" name="matricula" class="form-control" type="text" placeholder="Matrícula" disabled></div>
-                            <div class="col-md-4"><input id="iptu" name="iptu" class="form-control" type="text" placeholder="IPTU"></div>
-                            <div class="col-md-4"><input id="metro_quadrado" name="metros" class="form-control" type="text" placeholder="Metros quadrados"></div>
+                            <div class="col-md-4"><input id="matricula" name="matricula" class="form-control" type="text" placeholder="Matrícula" required disabled></div>
+                            <div class="col-md-4"><input id="iptu" name="iptu" class="form-control" type="text" placeholder="IPTU" required></div>
+                            <div class="col-md-4"><input id="metro_quadrado" name="metro_quadrado" class="form-control" type="text" placeholder="Metros quadrados" required disabled></div>
+                            <div class="col-md-4"><input id="sabesp" name="sabesp" class="form-control" type="text" placeholder="Sabesp" required  disabled></div>
+                            <div class="col-md-4"><input id="eletropaulo" name="eletropaulo" class="form-control" type="text" placeholder="Eletropaulo" required  disabled></div>
+                            <div class="col-md-4"><input id="valor_aluguel" name="valor_aluguel" class="form-control" placeholder="Aluguel" type="text"></div>
+                            <div class="col-md-4"><input id="valor_venda" name="valor_venda" class="form-control" placeholder="Venda" type="text"></div>
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    <input id="residencial" id="residencial" name="residencial" class="form-check-input" type="checkbox" value="residencial_true">
+                                    <label class="form-check-label" for="residencial_true">Residencial</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-bottom: 4px;"><input id="comodos" name="comodos" class="form-control" type="number" placeholder="Comodos" disabled disabled></div>
+                            <div class="col-md-4" style="padding-bottom: 4px;"><input name="longitude" class="form-control" type="text" placeholder="Longitude"></div>
+                            <div class="col-md-4" style="padding-bottom: 4px;"><input name="latitude" class="form-control" type="text" placeholder="Latitude"></div>
+                            <div class="col-md-6" style="padding-bottom: 4px;" >
+                                <select id="servico" name="servico" class="form-control"  required>
+                                    <option selected disabled>Tipo de serviço</option>
+                                    <option value="VE">Venda</option>
+                                    <option value="AL">Aluguel</option>
+                                    <option value="VA">Venda e Aluguel</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" style="padding-bottom: 4px;" >
+                                <select id="status" name="status" class="form-control" required>
+                                    <option selected disabled>Status</option>
+                                    <option value="AL">Alugado</option>
+                                    <option value="DI">Disponivel</option>
+                                    <option value="IN">Indisponivel</option>
+                                </select>
+                            </div>
                         </fieldset>
                         <fieldset style="margin-top: 20px;">
                             <legend>ENDEREÇO</legend>
-                            <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
-                            <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
-                            <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP">
+                            <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro" required disabled></div>
+                            <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro" required disabled></div>
+                            <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP" required disabled>
                             </div>
                             <div class="col-md-7" style="margin-top: 10px;"><input id="cidade" name="cidade" class="form-control" type="text"
-                                placeholder="Cidade"></div>
-                            <div class="col-md-2" style="margin-top: 10px;"><input id="uf" name="uf" class="form-control" type="text" placeholder="UF">
+                                placeholder="Cidade" required disabled></div>
+                            <div class="col-md-2" style="margin-top: 10px;"><input id="uf" name="uf" class="form-control" type="text" placeholder="UF" required disabled>
                             </div>
                         </fieldset>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                        <button id="btn-atualizar-imovel" class="btn btn-primary">Alterar</button>
+                        <button id="btn-atualizar-imovel" type="button" class="btn btn-primary">Alterar</button>
                     </div>
             </form>
         </div>

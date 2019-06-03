@@ -117,8 +117,6 @@ class ProprietarioDetail(APIView):
 class ImovelList(APIView):
     '''List all realty, or create a new realty.'''
 
-    parser_class = (FileUploadParser,)
-
     def get(self, request, format=None):
         """List all realty"""
 
@@ -139,7 +137,6 @@ class ImovelList(APIView):
 class ImovelDetail(APIView):
     """Retrieve, update or delete an realty instance."""
 
-    parser_class = (FileUploadParser,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_object(self, pk):

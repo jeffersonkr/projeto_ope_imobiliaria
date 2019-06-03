@@ -264,7 +264,7 @@ def cadastro_imoveis(request):
         imovel['qtd_comodo'] = request.POST.get('comodos')
         imovel['n_sabesp'] = request.POST.get('sabesp')
         imovel['n_eletropaulo'] = request.POST.get('eletropaulo')
-        imovel['valor_alguel'] = request.POST.get('valor_aluguel')
+        imovel['valor_aluguel'] = request.POST.get('valor_aluguel')
         imovel['valor_venda'] = request.POST.get('valor_venda')
         imovel['iptu'] = request.POST.get('iptu')
         imovel['metragem'] = request.POST.get('metro_quadrado')

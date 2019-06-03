@@ -9,7 +9,7 @@ urlpatterns = [
     path('corretor/', views.CorretorList.as_view(), name="corretor_list"),
     path('corretor/<int:pk>', views.CorretorDetail.as_view(), name="corretor_detail"),
     path('imovel/', views.ImovelList.as_view(), name="imovel_list"),
-    path('imovel/<int:pk>', views.ImovelList.as_view(), name="imovel_detail"),
+    path('imovel/<int:pk>', views.ImovelDetail.as_view(), name="imovel_detail"),
     path('proprietario/', views.ProprietarioList.as_view(),
          name="proprietario_list"),
     path('proprietario/<int:pk>', views.ProprietarioDetail.as_view(),
