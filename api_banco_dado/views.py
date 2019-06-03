@@ -2,6 +2,7 @@ from django.http import Http404
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
 from rest_framework import status
 from api_banco_dado.serializers.cliente_serializer import ClienteSerializer
 from api_banco_dado.serializers.corretor_serializer import CorretorSerializer

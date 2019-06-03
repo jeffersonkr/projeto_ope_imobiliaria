@@ -21,11 +21,9 @@ class Imovel(models.Model):
         Proprietario, models.DO_NOTHING, db_column='id_proprietario')
     id_corretor = models.ForeignKey(
         Corretor, models.DO_NOTHING, db_column='id_corretor', blank=True, null=True)
-    id_cliente = models.ForeignKey(
-        Cliente, models.DO_NOTHING, db_column='id_cliente', blank=True, null=True)
     matricula = models.CharField(max_length=30)
     residencial = models.BooleanField(default=False)
-    qtd_comodo = models.IntegerField()
+    qtd_comodo = models.IntegerField(blank=True, null=True)
     n_sabesp = models.CharField(max_length=30)
     n_eletropaulo = models.CharField(max_length=30)
     valor_aluguel = models.DecimalField(
@@ -46,16 +44,11 @@ class Imovel(models.Model):
     cidade = models.CharField(max_length=50)
     cep = models.CharField(max_length=9)
     uf = models.CharField(max_length=100)
-    imagem_1 = models.ImageField(upload_to=f'imovel/{matricula}/',
-                                 default=f"{matricula}_foto_1", blank=True, null=True)
-    imagem_2 = models.ImageField(upload_to=f'imovel/{matricula}/',
-                                 default=f"{matricula}_foto_2", blank=True, null=True)
-    imagem_3 = models.ImageField(upload_to=f'imovel/{matricula}/',
-                                 default=f"{matricula}_foto_3", blank=True, null=True)
-    imagem_4 = models.ImageField(upload_to=f'imovel/{matricula}/',
-                                 default=f"{matricula}_foto_4", blank=True, null=True)
-    imagem_5 = models.ImageField(upload_to=f'imovel/{matricula}/',
-                                 default=f"{matricula}_foto_5", blank=True, null=True)
+    imagem_1 = models.CharField(max_length=100, blank=True, null=True)
+    imagem_2 = models.CharField(max_length=100, blank=True, null=True)
+    imagem_3 = models.CharField(max_length=100, blank=True, null=True)
+    imagem_4 = models.CharField(max_length=100, blank=True, null=True)
+    imagem_5 = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = True

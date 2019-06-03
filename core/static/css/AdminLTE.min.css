@@ -37,7 +37,22 @@ input.form-control {
 
 textarea.form-control{
   min-width: 367px; 
-  min-height: 187px;
+  min-height: 343px;
   max-width: 367px; 
-  max-height: 187px;
+  max-height: 343px;
+}
+
+/* Esconde o input */
+input[type='file'] {
+  display: none
+}
+
+/* Aparência que terá o seletor de arquivo */
+label.photo{
+  background-color: #3498db;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  padding: 6px 20px
 }
