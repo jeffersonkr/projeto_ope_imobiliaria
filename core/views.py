@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
-from core.models.Imovel import Imovel
 
 
 def home(request):
