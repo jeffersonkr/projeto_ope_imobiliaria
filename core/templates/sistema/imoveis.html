@@ -31,18 +31,16 @@
                     <th>Quartos</th>
                     <th>Sabesp</th>
                     <th>Eletropaulo</th>
-                    <th>Descrição</th>
                     <th>IPTU</th>
                     <th>m²</th>
                     <th>Tipo de serviço</th>
                     <th>Status</th>
+                    <th>Descrição</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
                     <th>CEP</th>
                     <th>UF</th>
-                    <th>Telefone</th>
-                    <th>Email</th>
                     <th>Ação</th>
                 </tr>
             </thead>
@@ -50,7 +48,49 @@
                 {% for imovel in imoveis %}
                     <tr>
                         {% for key, values in imovel.items %}
-                        <td>{{ values }}</td>
+                            {% if key == "tipo_servico" %}
+                                {% if values == "VE" %}
+                                    <td>Venda</td>
+                                {% elif values == "AL" %}
+                                    <td>Aluguel</td>
+                                {% elif values == "VA" %}
+                                    <td>Venda e Aluguel</td>
+                                {% else %}
+                                    <td> - </td>
+                                {% endif %}
+                            {% elif key == "status_imovel" %}
+                                {% if values == "DI" %}
+                                    <td>Disponivel</td>
+                                {% elif values == "IN" %}
+                                    <td>Indisponivel</td>
+                                {% elif values == "AL" %}
+                                    <td>Alugado</td>
+                                {% else %}
+                                    <td> - </td>
+                                {% endif %}
+                            {% elif key == "residencial" %}
+                                {% if values %}
+                                    <td>Sim</td>
+                                {% else %}
+                                    <td>Não</td>
+                                {% endif %}
+                            {% elif key == "valor_aluguel" %}
+                                <!-- DO NOTHING -->
+                            {% elif key == "valor_venda" %}
+                                <!-- DO NOTHING -->
+                            {% elif key == "longitude" %}
+                                <!-- DO NOTHING -->
+                            {% elif key == "latitude" %}
+                                <!-- DO NOTHING -->
+                            {% elif "imagem" in key %}
+                                <!-- DO NOTHING -->
+                            {% elif key == "id_proprietario" %}
+                                <!-- DO NOTHING -->
+                            {% elif key == "id_corretor" %}
+                                <!-- DO NOTHING --> 
+                            {% else %}
+                                <td>{{ values }}</td>
+                            {% endif %}
                         {% endfor %}
                         
                         <td>
@@ -165,25 +205,20 @@
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>FOTOS DO IMÓVEL</legend>
-                        <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <input type="file" id='photo1' name="photo1"/>
-                            <label class="photo" id='label_photo1' for='photo1'>Imagem 1</label>
+                        <div class="col-md-12" style="padding-bottom: 4px;" >
+                            <input type="text" class="form-control" type="text" placeholder="URL foto 1" id='photo1' name="photo1"/>
                         </div>
-                        <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <input type="file" id='photo2' name="photo2"/>
-                            <label class="photo" id='label_photo2' for='photo2'>Imagem 2</label>
+                        <div class="col-md-12" style="padding-bottom: 4px;" >
+                            <input type="text" class="form-control" type="text" placeholder="URL foto 2" id='photo2' name="photo2"/>
                         </div>
-                        <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <input type="file" id='photo3' name="photo3"/>
-                            <label class="photo" id='label_photo3' for='photo3'>Imagem 3</label>
+                        <div class="col-md-12" style="padding-bottom: 4px;" >
+                            <input type="text" class="form-control" type="text" placeholder="URL foto 3" id='photo3' name="photo3"/>
                         </div>
-                        <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <input type="file" id='photo4' name="photo4"/>
-                            <label class="photo" id='label_photo4' for='photo4'>Imagem 4</label>
+                        <div class="col-md-12" style="padding-bottom: 4px;" >
+                            <input type="text" class="form-control" type="text" placeholder="URL foto 4" id='photo4' name="photo4"/>
                         </div>
-                        <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <input type="file" id='photo5' name="photo5"/>
-                            <label class="photo" id='label_photo5' for='photo5'>Imagem 5</label>
+                        <div class="col-md-12" style="padding-bottom: 4px;" >
+                            <input type="text" class="form-control" type="text" placeholder="URL foto 5" id='photo5' name="photo5"/>
                         </div>
                     </fieldset>
                 </div>

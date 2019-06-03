@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
+from core.models.Imovel import Imovel
 
 
 def home(request):
@@ -255,6 +256,7 @@ def cadastro_imoveis(request):
 
     if request.method == "POST":
         imovel = {}
+        imovel_foto = {}
         imovel['descricao'] = request.POST.get('descricao')
         imovel['id_proprietario'] = request.POST.get('id_proprietario')
         imovel['id_corretor'] = request.POST.get('id_corretor')
@@ -266,7 +268,7 @@ def cadastro_imoveis(request):
         imovel['valor_venda'] = request.POST.get('valor_venda')
         imovel['iptu'] = request.POST.get('iptu')
         imovel['metragem'] = request.POST.get('metro_quadrado')
-        imovel['tipo_servido'] = request.POST.get('servico')
+        imovel['tipo_servico'] = request.POST.get('servico')
         imovel['status_imovel'] = request.POST.get('status')
         imovel['latitude'] = request.POST.get('latitude')
         imovel['longitude'] = request.POST.get('longitude')
@@ -275,16 +277,17 @@ def cadastro_imoveis(request):
         imovel['cep'] = request.POST.get('cep')
         imovel['cidade'] = request.POST.get('cidade')
         imovel['uf'] = request.POST.get('uf')
-        imovel['imagem_1'] = request.FILES.get('photo1')
-        imovel['imagem_2'] = request.FILES.get('photo2')
-        imovel['imagem_3'] = request.FILES.get('photo3')
-        imovel['imagem_4'] = request.FILES.get('photo4')
-        imovel['imagem_5'] = request.FILES.get('photo5')
+        imovel['imagem_1'] = request.POST.get('photo1')
+        imovel['imagem_2'] = request.POST.get('photo2')
+        imovel['imagem_3'] = request.POST.get('photo3')
+        imovel['imagem_4'] = request.POST.get('photo4')
+        imovel['imagem_5'] = request.POST.get('photo5')
         imovel['residencial'] = True if request.POST.get(
             "residencial") == "residencial_true" else False
 
         url = settings.URL_API + 'imovel/'
         retorno_api = requests.api.post(url, json=imovel)
+        id_imovel = retorno_api.json()['id']
 
         if retorno_api.status_code == '201':
             return redirect('/cadastro/imoveis')
