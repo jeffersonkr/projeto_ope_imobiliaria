@@ -21,11 +21,9 @@ class Imovel(models.Model):
         Proprietario, models.DO_NOTHING, db_column='id_proprietario')
     id_corretor = models.ForeignKey(
         Corretor, models.DO_NOTHING, db_column='id_corretor', blank=True, null=True)
-    id_cliente = models.ForeignKey(
-        Cliente, models.DO_NOTHING, db_column='id_cliente', blank=True, null=True)
     matricula = models.CharField(max_length=30)
     residencial = models.BooleanField(default=False)
-    qtd_comodo = models.IntegerField()
+    qtd_comodo = models.IntegerField(blank=True, null=True)
     n_sabesp = models.CharField(max_length=30)
     n_eletropaulo = models.CharField(max_length=30)
     valor_aluguel = models.DecimalField(

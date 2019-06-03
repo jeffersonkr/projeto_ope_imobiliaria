@@ -7,3 +7,14 @@ $(document).ready(function () {
         }
     });
 });
+
+
+$(document).ready(function () {
+    $('#residencial').click(function () {
+        if ($(this).prop("checked") == true) {
+            $('#comodos').prop("disabled", false);
+        } else if ($(this).prop("checked") == false) {
+            $('#comodos').prop("disabled", true);
+        }
+    });
+});

@@ -2,6 +2,7 @@ from django.http import Http404
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
 from rest_framework import status
 from api_banco_dado.serializers.cliente_serializer import ClienteSerializer
 from api_banco_dado.serializers.corretor_serializer import CorretorSerializer
@@ -116,6 +117,8 @@ class ProprietarioDetail(APIView):
 class ImovelList(APIView):
     '''List all realty, or create a new realty.'''
 
+    parser_class = (FileUploadParser,)
+
     def get(self, request, format=None):
         """List all realty"""
 
@@ -136,6 +139,7 @@ class ImovelList(APIView):
 class ImovelDetail(APIView):
     """Retrieve, update or delete an realty instance."""
 
+    parser_class = (FileUploadParser,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_object(self, pk):

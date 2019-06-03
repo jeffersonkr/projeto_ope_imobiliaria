@@ -27,11 +27,15 @@
                 <tr>
                     <th>ID</th>
                     <th>Matricula</th>
+                    <th>Residencial</th>
+                    <th>Quartos</th>
+                    <th>Sabesp</th>
+                    <th>Eletropaulo</th>
                     <th>Descrição</th>
                     <th>IPTU</th>
                     <th>m²</th>
-                    <th>Proprietario</th>
-                    <th>Cliente</th>
+                    <th>Tipo de serviço</th>
+                    <th>Status</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
@@ -82,16 +86,16 @@
                 <div class="modal-body">
                     <fieldset>
                         <legend>DADOS DO IMÓVEL</legend>
-                        <div class="col-md-8"><textarea name="descricao" class="form-control" placeholder="Descrição"></textarea></div>
+                        <div class="col-md-8"><textarea name="descricao" class="form-control" placeholder="Descrição" required></textarea></div>
                         <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <select name="id_proprietario" class="form-control" placeholder="Proprietário">
+                            <select name="id_proprietario" class="form-control" placeholder="Proprietário" required>
                                 <option selected disabled>Nome proprietário</option>
                                 {% for i in proprietarios %}
                                     {% for key, value in i.items %}
                                         {% if "id" == key %}
                                             <option value="{{ value }}">
                                         {% endif %}
-                                                {% if "nome_proprietario" == key %}
+                                                {% if "nome" == key %}
                                                     {{ value }}</option>
                                                 {% endif %}
                                     {% endfor %}
@@ -100,14 +104,14 @@
                         </div>
 
                         <div class="col-md-4" style="padding-bottom: 4px;" >
-                            <select name="id_cliente" class="form-control">
-                                <option selected disabled>Nome Cliente</option>
-                                {% for i in clientes %}
+                            <select name="id_corretor" class="form-control">
+                                <option selected disabled>Nome Corretor</option>
+                                {% for i in corretores %}
                                     {% for key, value in i.items %}
                                         {% if "id" == key %}
                                             <option value="{{ value }}">
                                         {% endif %}
-                                                {% if "nome_cliente" == key %}
+                                                {% if "nome" == key %}
                                                     {{ value }}</option>
                                                 {% endif %}
                                     {% endfor %}
@@ -115,9 +119,38 @@
                             </select>
                         </div>
                         
-                        <div class="col-md-4"><input name="matricula" class="form-control" type="text" placeholder="Matrícula"></div>
-                        <div class="col-md-4"><input name="iptu" class="form-control" type="text" placeholder="IPTU"></div>
-                        <div class="col-md-4"><input name="metro_quadrado" class="form-control" type="text" placeholder="Metros quadrados"></div>
+                        <div class="col-md-4"><input name="matricula" class="form-control" type="text" placeholder="Matrícula" required></div>
+                        <div class="col-md-4"><input name="iptu" class="form-control" type="text" placeholder="IPTU" required></div>
+                        <div class="col-md-4"><input name="metro_quadrado" class="form-control" type="text" placeholder="Metros quadrados" required></div>
+                        <div class="col-md-4"><input name="sabesp" class="form-control" type="text" placeholder="Sabesp" required></div>
+                        <div class="col-md-4"><input name="eletropaulo" class="form-control" type="text" placeholder="Eletropaulo" required></div>
+                        <div class="col-md-4"><input name="valor_aluguel" class="form-control" placeholder="Aluguel" type="text"></div>
+                        <div class="col-md-4"><input name="valor_venda" class="form-control" placeholder="Venda" type="text"></div>
+                        <div class="col-md-12">
+                            <div class="form-check form-check-inline">
+                                <input id="residencial" name="residencial" class="form-check-input" type="checkbox" value="residencial_true">
+                                <label class="form-check-label" for="residencial_true">Residencial</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom: 4px;"><input id="comodos" name="comodos" class="form-control" type="number" placeholder="Comodos" disabled></div>
+                        <div class="col-md-4" style="padding-bottom: 4px;"><input name="longitude" class="form-control" type="text" placeholder="Longitude"></div>
+                        <div class="col-md-4" style="padding-bottom: 4px;"><input name="latitude" class="form-control" type="text" placeholder="Latitude"></div>
+                        <div class="col-md-6" style="padding-bottom: 4px;" >
+                            <select name="servico" class="form-control"  required>
+                                <option selected disabled>Tipo de serviço</option>
+                                <option value="VE">Venda</option>
+                                <option value="AL">Aluguel</option>
+                                <option value="VE">Venda e Aluguel</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="padding-bottom: 4px;" >
+                            <select name="status" class="form-control" required>
+                                <option selected disabled>Status</option>
+                                <option value="AL">Alugado</option>
+                                <option value="DI">Disponivel</option>
+                                <option value="IN">Indisponivel</option>
+                            </select>
+                        </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
@@ -128,6 +161,29 @@
                         <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
                             placeholder="Cidade"></div>
                         <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF">
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>FOTOS DO IMÓVEL</legend>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <input type="file" id='photo1' name="photo1"/>
+                            <label class="photo" id='label_photo1' for='photo1'>Imagem 1</label>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <input type="file" id='photo2' name="photo2"/>
+                            <label class="photo" id='label_photo2' for='photo2'>Imagem 2</label>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <input type="file" id='photo3' name="photo3"/>
+                            <label class="photo" id='label_photo3' for='photo3'>Imagem 3</label>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <input type="file" id='photo4' name="photo4"/>
+                            <label class="photo" id='label_photo4' for='photo4'>Imagem 4</label>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <input type="file" id='photo5' name="photo5"/>
+                            <label class="photo" id='label_photo5' for='photo5'>Imagem 5</label>
                         </div>
                     </fieldset>
                 </div>

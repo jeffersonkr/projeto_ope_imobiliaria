@@ -244,12 +244,12 @@ def cadastro_imoveis(request):
     todos_imoveis = requests.api.get(url).json()
     url_proprietario = settings.URL_API + "proprietario/"
     todos_proprietarios = requests.api.get(url_proprietario).json()
-    url_cliente = settings.URL_API + "cliente/"
-    todos_clientes = requests.api.get(url_cliente).json()
+    url_corretor = settings.URL_API + "corretor/"
+    todos_corretores = requests.api.get(url_corretor).json()
 
     contexto = {
         'proprietarios': todos_proprietarios,
-        'clientes': todos_clientes,
+        'corretores': todos_corretores,
         'imoveis': todos_imoveis
     }
 
@@ -257,18 +257,39 @@ def cadastro_imoveis(request):
         imovel = {}
         imovel['descricao'] = request.POST.get('descricao')
         imovel['id_proprietario'] = request.POST.get('id_proprietario')
+        imovel['id_corretor'] = request.POST.get('id_corretor')
         imovel['matricula'] = request.POST.get('matricula')
+        imovel['qtd_comodo'] = request.POST.get('comodos')
+        imovel['n_sabesp'] = request.POST.get('sabesp')
+        imovel['n_eletropaulo'] = request.POST.get('eletropaulo')
+        imovel['valor_alguel'] = request.POST.get('valor_aluguel')
+        imovel['valor_venda'] = request.POST.get('valor_venda')
         imovel['iptu'] = request.POST.get('iptu')
-        imovel['metro_quadrado'] = request.POST.get('metro_quadrado')
+        imovel['metragem'] = request.POST.get('metro_quadrado')
+        imovel['tipo_servido'] = request.POST.get('servico')
+        imovel['status_imovel'] = request.POST.get('status')
+        imovel['latitude'] = request.POST.get('latitude')
+        imovel['longitude'] = request.POST.get('longitude')
         imovel['endereco'] = request.POST.get('endereco')
         imovel['bairro'] = request.POST.get('bairro')
         imovel['cep'] = request.POST.get('cep')
         imovel['cidade'] = request.POST.get('cidade')
         imovel['uf'] = request.POST.get('uf')
-        url = settings.URL_API + 'imovel/'
-        retorno_api = requests.api.post(url, json=imovel).json()
+        imovel['imagem_1'] = request.FILES.get('photo1')
+        imovel['imagem_2'] = request.FILES.get('photo2')
+        imovel['imagem_3'] = request.FILES.get('photo3')
+        imovel['imagem_4'] = request.FILES.get('photo4')
+        imovel['imagem_5'] = request.FILES.get('photo5')
+        imovel['residencial'] = True if request.POST.get(
+            "residencial") == "residencial_true" else False
 
-        return redirect('/cadastro/imoveis')
+        url = settings.URL_API + 'imovel/'
+        retorno_api = requests.api.post(url, json=imovel)
+
+        if retorno_api.status_code == '201':
+            return redirect('/cadastro/imoveis')
+        else:
+            HttpResponse("erro cadastramento de imoveis")
 
     return render(request, 'sistema/imoveis.html', contexto)
 

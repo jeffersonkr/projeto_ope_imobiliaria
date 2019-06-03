@@ -72,3 +72,40 @@ $("#btn-delete-imovel").on("click", function () {
     $(location).attr("href", href_excluir);
 });
 //End delete cliente script//
+
+
+
+$('#photo1').on('change', function () {
+    var fileName = document.getElementById('label_photo1');
+    var photo_name = this.value;
+    photo_name = photo_name.split("\\").slice(-1);
+    fileName.textContent = photo_name;
+})
+
+$('#photo2').on('change', function () {
+    var fileName = document.getElementById('label_photo2');
+    var photo_name = this.value;
+    photo_name = photo_name.split("\\").slice(-1);
+    fileName.textContent = photo_name;
+})
+
+$('#photo3').on('change', function () {
+    var fileName = document.getElementById('label_photo3');
+    var photo_name = this.value;
+    photo_name = photo_name.split("\\").slice(-1);
+    fileName.textContent = photo_name;
+})
+
+$('#photo4').on('change', function () {
+    var fileName = document.getElementById('label_photo4');
+    var photo_name = this.value;
+    photo_name = photo_name.split("\\").slice(-1);
+    fileName.textContent = photo_name;
+})
+
+$('#photo5').on('change', function () {
+    var fileName = document.getElementById('label_photo5');
+    var photo_name = this.value;
+    photo_name = photo_name.split("\\").slice(-1);
+    fileName.textContent = photo_name;
+})
