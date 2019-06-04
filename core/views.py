@@ -7,9 +7,11 @@ from core.mail import send_mail_template
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import requests
+import time
 from core.models.Contrato import Contrato
 from core.models.Imovel import Imovel
 from core.models.Cliente import Cliente
+from core.models.Boleto import Boleto
 
 
 def home(request):
@@ -28,9 +30,11 @@ def registrar(request):
 def home_sistema(request):
     url = settings.URL_API + "imovel/"
     todos_imoveis = requests.api.get(url).json()
+    boletos = Boleto.objects.all()
 
     contexto = {
-        'imoveis': todos_imoveis
+        'imoveis': todos_imoveis,
+        'boletos': boletos
     }
 
     return render(request, 'sistema/index.html', contexto)
@@ -342,6 +346,7 @@ def contrato(request):
                 periodo_contrato=request.POST.get('periodo'),
                 observacao=request.POST.get('observacao')
             )
+            contrato_novo.save()
 
             if imovel.tipo_servico == "AL":
                 imovel.status_imovel = "AL"
@@ -350,7 +355,11 @@ def contrato(request):
                 imovel.status_imovel = 'IN'
                 imovel.save()
 
-            contrato_novo.save()
+            id_contrato = contrato_novo.id
+            boleto = Boleto.objects.create(
+                contrato=Contrato.objects.get(id=id_contrato))
+            boleto.save()
+
             return redirect('contrato-view')
         except:
             return redirect('contrato-view')
