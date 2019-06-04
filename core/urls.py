@@ -8,7 +8,6 @@ urlpatterns = [
     path('register/', registrar, name='register'),
     path('sistema/', home_sistema, name='home-sistema'),
     path('cadastro/', cadastro, name='cadastro'),
-    path('cadastro/usuarios/', cadastro_usuario, name='cadastro-usuarios'),
     path('cadastro/clientes/', cadastro_clientes, name='cadastro-clientes'),
     path('cadastro/imoveis/', cadastro_imoveis, name='cadastro-imoveis'),
     path('cadastro/corretores/', cadastro_corretores, name='cadastro-corretores'),

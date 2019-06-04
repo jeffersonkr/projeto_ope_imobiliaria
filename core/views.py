@@ -112,13 +112,6 @@ def delete_cliente(request, pk):
     return redirect('/cadastro/clientes')
 
 
-def delete_usuario(request, pk):
-    usuario = Usuario.objects.get(id=pk)
-    usuario.delete()
-
-    return redirect('cadastro-clientes')
-
-
 def delete_corretor(request, pk):
     headers = get_token(request)
     url = settings.URL_API + f"corretor/{pk}"
@@ -302,35 +295,6 @@ def cadastro_imoveis(request):
             HttpResponse("erro cadastramento de imoveis")
 
     return render(request, 'sistema/imoveis.html', contexto)
-
-
-def cadastro_usuario(request):
-    from django.contrib.auth.hashers import make_password
-
-    todos_usuarios = Usuario.objects.all()
-    contexto = {
-        'usuarios': todos_usuarios,
-    }
-    if request.POST:
-        login = request.POST.get('login')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        password2 = request.POST.get('password2')
-
-        if password == password2:
-            novo_user = Usuario.objects.create(
-                nome=login,
-                email=email,
-                senha=make_password(password)
-            )
-
-            novo_user.save()
-            return redirect('cadastro-usuarios')
-
-        else:
-            return redirect('cadastro-usuarios')
-
-    return render(request, 'sistema/usuario.html', contexto)
 
 
 def send_email(request):
