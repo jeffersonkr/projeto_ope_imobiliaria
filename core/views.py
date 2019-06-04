@@ -7,6 +7,9 @@ from core.mail import send_mail_template
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import requests
+from core.models.Contrato import Contrato
+from core.models.Imovel import Imovel
+from core.models.Cliente import Cliente
 
 
 def home(request):
@@ -285,12 +288,10 @@ def cadastro_imoveis(request):
 
         url = settings.URL_API + 'imovel/'
         retorno_api = requests.api.post(url, json=imovel)
-        id_imovel = retorno_api.json()['id']
-
-        if retorno_api.status_code == '201':
-            return redirect('/cadastro/imoveis')
-        else:
+        if retorno_api.status_code == 400:
             HttpResponse("erro cadastramento de imoveis")
+        elif retorno_api.status_code == 201:
+            return redirect('cadastro-imoveis')
 
     return render(request, 'sistema/imoveis.html', contexto)
 
@@ -320,3 +321,45 @@ def send_email(request):
                 'email_msg': 'Erro ao enviar email'
             }
             return render(request, 'index.html', context)
+
+
+def contrato(request):
+    contexto = {
+        'contratos': Contrato.objects.all(),
+        'imoveis': Imovel.objects.filter(status_imovel='DI'),
+        'clientes': Cliente.objects.all()
+    }
+
+    if request.POST:
+        try:
+            imovel = Imovel.objects.get(id=request.POST.get('id_imovel'))
+            cliente = Cliente.objects.get(id=request.POST.get('id_cliente'))
+
+            contrato_novo = Contrato.objects.create(
+                id_imovel=imovel,
+                id_cliente=cliente,
+                tipo_servico=imovel.tipo_servico,
+                periodo_contrato=request.POST.get('periodo'),
+                observacao=request.POST.get('observacao')
+            )
+
+            if imovel.tipo_servico == "AL":
+                imovel.status_imovel = "AL"
+                imovel.save()
+            else:
+                imovel.status_imovel = 'IN'
+                imovel.save()
+
+            contrato_novo.save()
+            return redirect('contrato-view')
+        except:
+            return redirect('contrato-view')
+
+    return render(request, 'sistema/contrato.html', contexto)
+
+
+def deletar_contrato(request, pk):
+    contrato = Contrato.objects.get(id=pk)
+    contrato.delete()
+
+    return redirect('contrato-view')
