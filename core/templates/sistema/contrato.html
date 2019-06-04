@@ -1,0 +1,138 @@
+{% extends "sistema/home-sistema.html" %}
+{% block content %}
+
+<section class="content-header">
+    <h1>
+        Gestão Clientes
+        <small>Cadastro</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Cadastro</a></li>
+        <li class="active">Clientes</li>
+    </ol>
+</section><br><br>
+
+<div class="box">
+    <div class="box-header">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default">Incluir novo cliente</button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body text-center">
+        <table id="example1" class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Matricula Imovel</th>
+                    <th>Nome Cliente</th>
+                    <th>Tipo de serviço</th>
+                    <th>Periodo de contrato</th>
+                    <th>Observações</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contrato in contratos %}
+                    <tr>
+                    <td>{{ contrato.id }}</td>
+                    <td>{{ contrato.id_imovel }}</td>
+                    <td>{{ contrato.id_cliente }}</td>
+                    {% if contrato.id_imovel.tipo_servico == "VA" %}
+                        <td>Venda e Aluguel</td>
+                    {% elif contrato.id_imovel.tipo_servico == "VE" %}
+                        <td>Venda</td>
+                    {% elif contrato.id_imovel.tipo_servico == "AL" %}
+                        <td>Aluguel</td>
+                    {% endif %}
+                    <td>{{ contrato.periodo_contrato }}</td>
+                    <td>{{ contrato.observacao }}</td>
+                    <td>
+                        <a href="{% url 'deletar_contrato' contrato.id %}"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<!-- modal-cadastro de clientes -->
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Incluir novo cliente</h4>
+            </div>
+
+            <form id="form-cliente" action="" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>Imovel</legend>
+                        <div class="col-md-12">
+                            <select name="id_imovel" class="form-control"  required>
+                                    <option selected disabled>Matricula do Imovel</option>
+                                    {% for imovel in imoveis %}
+                                        <option value="{{ imovel.id }}">{{ imovel.matricula }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>Cliente</legend>
+                        <div class="col-md-12">
+                            <select name="id_cliente" class="form-control"  required>
+                                    <option selected disabled>Nome Cliente</option>
+                                    {% for cliente in clientes %}
+                                        <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top: 20px;">
+                        <legend>Dados do contrato</legend>
+                        <div class="col-md-6"><input name="periodo" class="form-control" type="number" placeholder="Periodo do contrato (Anos)" required></div>
+                        <div class="col-md-6"><input name="observacao" class="form-control" type="text" placeholder="Observações"></div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button id="btn-cad-cliente" type="submit" class="btn btn-primary">Incluir</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- modal-excluir cliente -->
+<div class="modal fade" id="modal-exluir-cliente" id_cliente="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Excluir cliente</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+{% endblock content %}
