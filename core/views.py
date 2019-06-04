@@ -5,10 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from core.mail import send_mail_template
 from django.shortcuts import render, redirect
-from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
-from core.models.Accounts import Usuario
 
 
 def home(request):
