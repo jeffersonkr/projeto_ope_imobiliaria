@@ -1,49 +1,90 @@
 {% extends "sistema/home-sistema.html" %}
+{% load core_extras %}
 {% block content %}
 
-
 <div class="box">
-    <!-- /.box-header -->
-    <div class="box-body text-center">
-        <legend>Relatório</legend>
-        <table id="example1" class="table table-bordered table-striped text-center">
-            <thead>
-                <tr>
-                    <th>Valor aluguel</th>
-                    <th>Nome</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {{boletos}}
-                    {% for boleto in boletos %}
-                        <td>{{ boleto.contrato.id_imovel.valor_aluguel }}</td>
-                    {% endfor %}
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="mapas_imoveis"> 
+    <div class="mapas_imoveis box-body text-center"> 
     <legend>Mapa</legend>
     <div action="" method="GET" class="mapa-busca" style="padding-bottom: 3px;" >
         {% csrf_token %}
         <select id="select_options" name="id_imovel" class="form-control" placeholder="Imovel">
             <option selected disabled>Nome imovel</option>
             {% for i in imoveis %}
-            {% for key, value in i.items %}
-            
-                {% if "id" == key %}
-                    <option value="{{ value }}">
-                {% endif %}
-                        {% if "endereco" == key %}
-                            {{ value }}</option>
-                        {% endif %}
-    
-            {% endfor %}
+                {% for key, value in i.items %}
+                
+                    {% if "id" == key %}
+                        <option value="{{ value }}">
+                    {% endif %}
+                            {% if "endereco" == key %}
+                                {{ value }}</option>
+                            {% endif %}
+        
+                {% endfor %}
             {% endfor %}
         </select>
     </div>
-<div id="map"></div>
+    <div id="map"></div>
+    <div class="box-body text-center wrapper-overflow">
+        <legend>Recebidos</legend>
+        <table id="example1" class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>ID Boleto</th>
+                    <th>Nome Cliente</th>
+                    <th>Valor aluguel</th>
+                    <th>IPTU</th>
+                    <th>Parcela</th>
+                    <th>Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for boleto in boletos %}
+                    {% if boleto.status == "PG" %}
+                        <tr>
+                            <td>{{ boleto.id }}</td>
+                            <td>{{ boleto.contrato.id_cliente.nome }}</td>
+                            <td>{{ boleto.contrato.id_imovel.valor_aluguel }}</td>
+                            <td>{% widthratio boleto.contrato.id_imovel.iptu 1 1 %}</td>
+                            <td>{{ boleto.parcela }}/{{ boleto.contrato.periodo_contrato }}</td>
+                            <td>{{ boleto.valor_total }}</td>
+                        </tr>
+                    {% else %}
+                        <!-- DO NOTHING -->
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="box-body text-center wrapper-overflow">
+        <legend>A Receber</legend>
+        <table id="example1" class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>ID Boleto</th>
+                    <th>Nome Cliente</th>
+                    <th>Valor aluguel</th>
+                    <th>IPTU</th>
+                    <th>Parcela</th>
+                    <th>Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for boleto in boletos %}
+                    {% if boleto.status == "AB" %}
+                        <tr>
+                            <td>{{ boleto.id }}</td>
+                            <td>{{ boleto.contrato.id_cliente.nome }}</td>
+                            <td>{{ boleto.contrato.id_imovel.valor_aluguel }}</td>
+                            <td>{{ boleto.contrato.id_imovel.iptu|div }}</td>
+                            <td>{{ boleto.parcela }}/{{ boleto.contrato.periodo_contrato }}</td>
+                            <td>{{ boleto.valor_total }}</td>
+                        </tr>
+                    {% else %}
+                        <!-- DO NOTHING -->
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock content %}

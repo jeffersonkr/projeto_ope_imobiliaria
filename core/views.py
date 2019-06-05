@@ -331,7 +331,8 @@ def contrato(request):
     contexto = {
         'contratos': Contrato.objects.all(),
         'imoveis': Imovel.objects.filter(status_imovel='DI'),
-        'clientes': Cliente.objects.all()
+        'clientes': Cliente.objects.all(),
+        'parcela': 0,
     }
 
     if request.POST:
@@ -356,12 +357,27 @@ def contrato(request):
                 imovel.save()
 
             id_contrato = contrato_novo.id
-            boleto = Boleto.objects.create(
-                contrato=Contrato.objects.get(id=id_contrato))
-            boleto.save()
+            periodo_contrato = int(contrato_novo.periodo_contrato)
+            tipo_servico = contrato_novo.tipo_servico
+
+            if tipo_servico == "AL":
+                valor_total = (
+                    contrato_novo.id_imovel.iptu/12 + contrato_novo.id_imovel.valor_aluguel)
+            elif tipo_servico == "VE":
+                valor_total = contrato_novo.id_imovel.valor_venda
+
+            while periodo_contrato > 0:
+                boleto = Boleto.objects.create(
+                    contrato=Contrato.objects.get(id=id_contrato),
+                    parcela=periodo_contrato,
+                    valor_total=valor_total
+                )
+                boleto.save()
+                periodo_contrato -= 1
 
             return redirect('contrato-view')
-        except:
+        except Exception as error:
+            print(error)
             return redirect('contrato-view')
 
     return render(request, 'sistema/contrato.html', contexto)
@@ -372,3 +388,22 @@ def deletar_contrato(request, pk):
     contrato.delete()
 
     return redirect('contrato-view')
+
+
+def boleto(request):
+    contexto = {
+        'boletos': Boleto.objects.all(),
+    }
+    return render(request, 'sistema/boleto.html', contexto)
+
+
+def alterar_boleto(request, pk):
+    boleto = Boleto.objects.get(id=pk)
+    if boleto.status == "AB":
+        boleto.status = "PG"
+        boleto.save()
+    else:
+        boleto.status = "AB"
+        boleto.saver()
+
+    return redirect('boleto-view')

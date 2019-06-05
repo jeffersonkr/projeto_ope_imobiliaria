@@ -7,6 +7,8 @@ urlpatterns = [
     path('logout/', sair, name='logout'),
     path('register/', registrar, name='register'),
     path('sistema/', home_sistema, name='home-sistema'),
+    path('boleto/', boleto, name='boleto-view'),
+    path('boleto/alterar-boleto/<int:pk>', alterar_boleto),
     path('contrato/', contrato, name='contrato-view'),
     path('contrato/deletar_contrato/<int:pk>',
          deletar_contrato, name="deletar_contrato"),

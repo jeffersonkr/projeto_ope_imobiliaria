@@ -1,0 +1,52 @@
+{% extends "sistema/home-sistema.html" %}
+{% block content %}
+
+<section class="content-header">
+    <h1>
+        Gestão Clientes
+        <small>Cadastro</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Cadastro</a></li>
+        <li class="active">Clientes</li>
+    </ol>
+</section><br><br>
+
+<div class="box">
+    <div class="box-header">
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body text-center">
+        <table id="example1" class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>ID Boleto</th>
+                    <th>Nome Cliente</th>
+                    <th>Parcela</th>
+                    <th>Status</th>
+                    <th>Alterar Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for boleto in boletos %}
+                    <tr>
+                    <td>{{ boleto.id }}</td>
+                    <td>{{ boleto.contrato.id_cliente }}</td>
+                    <td>{{ boleto.parcela }}</td>
+                    {% if boleto.status == "AB" %}
+                        <td>Aberto</td>
+                    {% else %}
+                        <td>PAGO</td>
+                    {% endif %}
+                    <td>
+                        <a href="/boleto/alterar-boleto/{{ boleto.id }}"><i class="fa fa-pencil-square-o"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+{% endblock content %}
