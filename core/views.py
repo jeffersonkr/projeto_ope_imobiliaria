@@ -7,9 +7,11 @@ from core.mail import send_mail_template
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import requests
+import time
 from core.models.Contrato import Contrato
 from core.models.Imovel import Imovel
 from core.models.Cliente import Cliente
+from core.models.Boleto import Boleto
 
 
 def home(request):
@@ -28,9 +30,11 @@ def registrar(request):
 def home_sistema(request):
     url = settings.URL_API + "imovel/"
     todos_imoveis = requests.api.get(url).json()
+    boletos = Boleto.objects.all()
 
     contexto = {
-        'imoveis': todos_imoveis
+        'imoveis': todos_imoveis,
+        'boletos': boletos
     }
 
     return render(request, 'sistema/index.html', contexto)
@@ -327,7 +331,8 @@ def contrato(request):
     contexto = {
         'contratos': Contrato.objects.all(),
         'imoveis': Imovel.objects.filter(status_imovel='DI'),
-        'clientes': Cliente.objects.all()
+        'clientes': Cliente.objects.all(),
+        'parcela': 0,
     }
 
     if request.POST:
@@ -342,6 +347,7 @@ def contrato(request):
                 periodo_contrato=request.POST.get('periodo'),
                 observacao=request.POST.get('observacao')
             )
+            contrato_novo.save()
 
             if imovel.tipo_servico == "AL":
                 imovel.status_imovel = "AL"
@@ -350,9 +356,28 @@ def contrato(request):
                 imovel.status_imovel = 'IN'
                 imovel.save()
 
-            contrato_novo.save()
+            id_contrato = contrato_novo.id
+            periodo_contrato = int(contrato_novo.periodo_contrato)
+            tipo_servico = contrato_novo.tipo_servico
+
+            if tipo_servico == "AL":
+                valor_total = (
+                    contrato_novo.id_imovel.iptu/12 + contrato_novo.id_imovel.valor_aluguel)
+            elif tipo_servico == "VE":
+                valor_total = contrato_novo.id_imovel.valor_venda
+
+            while periodo_contrato > 0:
+                boleto = Boleto.objects.create(
+                    contrato=Contrato.objects.get(id=id_contrato),
+                    parcela=periodo_contrato,
+                    valor_total=valor_total
+                )
+                boleto.save()
+                periodo_contrato -= 1
+
             return redirect('contrato-view')
-        except:
+        except Exception as error:
+            print(error)
             return redirect('contrato-view')
 
     return render(request, 'sistema/contrato.html', contexto)
@@ -363,3 +388,22 @@ def deletar_contrato(request, pk):
     contrato.delete()
 
     return redirect('contrato-view')
+
+
+def boleto(request):
+    contexto = {
+        'boletos': Boleto.objects.all(),
+    }
+    return render(request, 'sistema/boleto.html', contexto)
+
+
+def alterar_boleto(request, pk):
+    boleto = Boleto.objects.get(id=pk)
+    if boleto.status == "AB":
+        boleto.status = "PG"
+        boleto.save()
+    else:
+        boleto.status = "AB"
+        boleto.saver()
+
+    return redirect('boleto-view')
