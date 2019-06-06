@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<body>
+    <!-- IE panel-->
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <!-- Page-->
+    <div class="page text-center">
+      <!-- Page Head-->
+      <header class="page-head">
+        <!-- RD Navbar Transparent-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-top-panel rd-navbar-light" data-lg-stick-up-offset="79px" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-static" data-lg-auto-height="true" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-stick-up="true">
+            <div class="container">
+              <div class="rd-navbar-inner">
+                <div class="rd-navbar-top-panel">
+                  <div class="left-side">
+                    <ul class="rd-navbar-top-links list-unstyled">
+                      {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                          <li><a class="text-uppercase text-ubold" href="{% url 'home-sistema' %}"><small>Gerenciamento</small></a></li>
+                        {% else %}
+                          <li><a class="text-uppercase text-ubold" href=""><small>Perfil</small></a></li>
+                        {% endif %}
+                      {% endif %}
+                    </ul>
+                  </div>
+                  <div class="right-side">
+                    {% if user.is_authenticated %}
+                    <p> Ola {{user.username}} &nbsp
+                    <a class="text-uppercase text-ubold" href="{% url 'logout' %}"><small>Sair</small></a>
+                    {% else %}
+                    <address class="contact-info text-left">
+                      <span class="p"><a class="text-uppercase text-ubold" href="{% url 'login' %}"><small>Login</small></a></span>
+                      
+                    </address>
+                    {% endif %}
+                  </div>
+                </div>
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!-- RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-nav-wrap"><span></span></button>
+                  <!-- RD Navbar Top Panel Toggle-->
+                  <button class="rd-navbar-top-panel-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-top-panel"><span></span></button>
+                  <!--Navbar Brand-->
+                  <div class="rd-navbar-brand"><a href="../index.html"><img width='217' height='36' src="{% static 'media/logotipo.png' %}" alt=''/></a></div>
+                </div>
+                <div class="rd-navbar-menu-wrap">
+                  <div class="rd-navbar-nav-wrap">
+                    <div class="rd-navbar-mobile-scroll">
+                      <!--Navbar Brand Mobile-->
+                      <div class="rd-navbar-mobile-brand"><a href="../index.html"><img width='217' height='36' src="{% static 'media/logotipo.png' %}" alt=''/></a></div>
+                      <!-- RD Navbar Nav-->
+                      <ul class="rd-navbar-nav">
+                        
+                        <li><a href="{% url 'home' %}"><span>Home</span></a>
+                       
+                        
+                        </li>
+                        <li><a href="{% url 'catalogo' %}"><span>Catalogo</span></a>
+                        </li>
+                        <li><a href="{% url 'anuncie' %}"><span>Anuncie</span></a>
+                        </li>
+                        <li><a href="{% url 'servicos' %}"><span>Serviços</span></a>
+                        </li>
+                        <li class="active"><a href="{% url 'sobre' %}"><span>Sobre</span></a>
+                        </li>
+                        <li><a href="{% url 'contato' %}"><span>Contato</span></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+<hr>
+
+
+        <section>
+          <div class="parallax-container" data-parallax-img="images/bg-01-1920x768.jpg">
+            <div class="parallax-content">
+              <div class="container section-98 section-md-110">
+                <h2 class="font-weight-bold">SKIMOVEIS</h2>
+                <hr class="divider bg-saffron">
+               
+<h3 class="font-weight-bold text-primary">Conte com a máxima transparência </h3>
+
+<p>
+A SKIMOVEIS foi fundada em 2007 com o intuito de oferecer serviços diferenciados no atendimento aos clientes do ramo imobiliário. Pautando sempre seu trabalho na honestidade, gerou a confiança hoje depositada por seus inúmeros clientes.
+
+Atuando em todos os segmentos deste mercado, somos referência devido a nossa agilidade e capacidade em gerar negócios . Com um grupo de funcionários sempre treinados e atualizados, a empresa consolidou sua posição no mercado ,
+
+Para atender cada vez melhor, busca soluções modernas e praticas, adaptando-se à realidade dos novos tempos, através da informação, mantendo atendimento personalizado a cada cliente.
+
+</p>
+
+
+
+
+
+<h4 class="font-weight-bold text-primary">MISSAO</h4>
+
+Oferecer ótimas oportunidades de negócios, prezando pela excelência no atendimento, voltada para satisfação de nossos clientes, indicando a melhor solução imobiliária, tendo como base a ética e o comprometimento com os colaboradores, compradores e vendedores.
+
+<h4 class="font-weight-bold text-primary">VISÃO</h4>
+
+
+Nossa Visão
+
+Ser reconhecida como uma das empresas lideres e tradicionais do mercado imobiliário em negociação e qualidade de prestação de serviços. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+                
+
+   
+
+        </section>
+  
+    
+
+
+
+      <!-- Page Footers-->
+      <!-- Default footer-->
+      <footer class="section-relative section-top-66 section-bottom-34 page-footer bg-gray-base context-dark">
+        <div class="container">
+          <div class="row justify-content-md-center text-xl-left">
+            <div class="col-md-8 col-lg-12">
+              <div class="row justify-content-sm-center">
+                <div class="col-sm-7 text-sm-left col-lg-4 col-xl-3 order-xl-4">
+                  
+                        <!-- Post Widget-->                        <!-- Post Widget-->
+                        <article class="post widget-post text-left"><a href="#">
+                            <div class="unit flex-row unit-spacing-xs align-items-center">
+                              <div class="unit-body">
+                              
+                                <div class="post-title">
+                                  <h6 class="text-regular">Cadastre seu e-mail e receba noticias sobre o nosso catalogo </h6>
+                                </div>
+                              </div>
+                            </div></a></article>
+
+                            <br>
+                        <!-- Post Widget-->
+
+                        <form class="rd-mailform" data-form-output="form-subscribe-footer" data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
+                            <div class="form-group">
+                              <div class="input-group input-group-sm"><span class="input-group-prepend"></span>
+                                <input class="form-control" placeholder="E-mail" type="email" name="email" data-constraints="@Required @Email"><span class="input-group-append">
+                                  <button class="btn btn-sm btn-primary" type="submit">Se inscreva</button></span>
+                              </div>
+                            </div>
+                            <div class="form-output" id="form-subscribe-footer"></div>
+                          </form>
+
+
+                </div>
+                <div class="col-sm-5 offset-top-41 offset-sm-top-0 text-sm-left col-lg-3 col-xl-2 order-xl-3">
+                  
+                  <div class="d-block">
+                    <div class="d-inline-block">
+                      <ul class="list list-marked">
+                      
+                        <li><a href="#">Financiamento</a></li>
+                        <li><a href="#">Catalogo</li></a>
+                        <li><a href="#">Corretores</a></li>
+                        <li><a href="#">Trabalhe conosco</li> </a>
+                        <li><a href="#">Area do Corretor</li></a>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 offset-top-41 col-lg-5 offset-lg-top-0 text-lg-left col-xl-4 order-xl-2">
+                  
+                  <i class="fas fa-phone"></i> &nbsp; &nbsp;(11) - 2747-5685 <br>
+                  <i class="fas fa-envelope"></i>&nbsp;&nbsp; skimoveis@skimoveis.com.br
+                  <p>Rua Ribeiro de Lima, 282, Sala 302 – Bom Retiro, CEP 01142-300 </p>
+
+                    Horário de atendimento <br>
+                    Segunda a sexta-feira das 8:15h às 19h. <br>
+                    Sábado: das 8h às 14h
+
+                  <div class="offset-top-30">
+
+                  </div>
+                </div>
+                <div class="col-sm-12 offset-top-66 col-xl-3 order-xl-1 offset-xl-top-0">
+                  <!-- Footer brand-->
+                  <p> A SkImoveis e uma imobiliria localizada no Bom Retiro – SP, que alinha o metodo tradicional e a técnologia para atender melhor os seus clientes </p>
+                  
+                  CRECI-SP J25.399
+                  <br> <br>
+                  
+                  
+               
+
+                  
+                        <ul class="list-inline">
+                          <li class="list-inline-item"><a class="icon fa fa-facebook icon-xxs icon-circle icon-darkest-filled" href="#"></a></li>
+                          
+                          
+                          <li class="list-inline-item"><a class="icon fa fa-instagram icon-xxs icon-circle icon-darkest-filled" href="#"></a></li>
+                          
+
+
+
+
+
+
+                          <li class="list-inline-item"><a class="icon fa fa-whatsapp icon-xxs icon-circle icon-darkest-filled" href="https://api.whatsapp.com/send?phone=5511959906668"></a></li>                          
+
+
+                          
+                          
+                        </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container offset-top-50">
+          <p class="small text-darker"> SkImoveis Imobiliária &copy; <span id="copyright-year"></span> . 
+            <!-- {%FOOTER_LINK}-->
+          </p>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Java script-->
+    <script data-cfasync="false" src="{% static 'cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script>
+    <script src="{% static 'js/core.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+	
+
+	
+  </body><!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FT69');</script><!-- End Google Tag Manager -->
+
+  {% for imovel in imoveis %}
+    <img src={{ imovel.image_1 }} />
+    {% endfor %}
+  {% endblock content %}
+
+  

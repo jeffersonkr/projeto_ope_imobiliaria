@@ -8,10 +8,59 @@ from django.shortcuts import render, redirect
 from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
+from core.models.contato2 import Contato
+from .forms import ContatoForm
 
 
 def home(request):
-    return render(request, 'index.html')
+    form = ContatoForm(request.POST, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('conf')
+    return render(request, 'index.html', {'form': form})
+
+
+def conf(request):
+    return render(request, 'confirma.html')
+
+
+def catalogo(request):
+    return render(request, 'catalogo.html')
+
+
+def anuncie(request):
+    return render(request, 'anuncie.html')
+
+
+def servicos(request):
+    return render(request, 'servicos.html')
+
+
+def sobre(request):
+    return render(request, 'sobre.html')
+
+
+def contato(request):
+    form = ContatoForm(request.POST, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('conf')
+    return render(request, 'contato.html', {'form': form})
+
+
+
+def financiamento(request):
+    return render(request, 'financiamento.html')
+
+
+def corretores(request):
+    return render(request, 'corretores.html')
+
+
+def trabalhe(request):
+    return render(request, 'trabalhe.html')
 
 
 def sair(request):

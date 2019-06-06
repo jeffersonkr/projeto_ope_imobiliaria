@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "/home/jkwak/virtualenv/OPE/bin/python3",
-    "python.formatting.autopep8Path": "autopep8",
-    "editor.formatOnSave": true,
-}
