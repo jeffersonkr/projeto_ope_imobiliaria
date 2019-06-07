@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\Marcio\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
+    "python.pythonPath": "/home/jkwak/Faculdade/env_ope/bin/python3",
     "python.formatting.autopep8Path": "autopep8",
     "editor.formatOnSave": true,
 }

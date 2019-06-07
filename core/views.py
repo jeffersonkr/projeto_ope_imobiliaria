@@ -13,12 +13,11 @@ from core.models.Imovel import Imovel
 from core.models.Cliente import Cliente
 from core.models.Boleto import Boleto
 from core.models.contato2 import Contato
-from .forms import ContatoForm,AnuncieForm
+from .forms import ContatoForm, AnuncieForm
 
 
 def home(request):
     form = ContatoForm(request.POST, request.FILES or None)
-    
 
     if form.is_valid():
         form.save()
@@ -32,8 +31,8 @@ def conf(request):
 
 def catalogo(request):
     url = settings.URL_API + "imovel/"
-    todos_imoveis = requests.api.get(url).json() 
-    
+    todos_imoveis = requests.api.get(url).json()
+
     contexto = {
 
         'imoveis': todos_imoveis
@@ -44,7 +43,6 @@ def catalogo(request):
 
 def anuncie(request):
     form = AnuncieForm(request.POST, request.FILES or None)
-    
 
     if form.is_valid():
         form.save()
@@ -67,7 +65,6 @@ def contato(request):
         form.save()
         return redirect('conf')
     return render(request, 'contato.html', {'form': form})
-
 
 
 def financiamento(request):
