@@ -160,7 +160,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
 # Api constants
-URL_API = "http://localhost:8000/api/"
+URL_API = "http://ec2-18-228-220-213.sa-east-1.compute.amazonaws.com:8000/api/"
 LOGIN_API = "admin"
 PASSWORD_API = "admin"
 
