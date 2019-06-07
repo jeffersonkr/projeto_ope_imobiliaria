@@ -96,9 +96,8 @@ def registrar(request):
 
 
 def home_sistema(request):
-    #url = settings.URL_API + "imovel/"
-    #todos_imoveis = requests.api.get(url).json()
-    todos_imoveis = Imovel.objects.all()
+    url = settings.URL_API + "imovel/"
+    todos_imoveis = requests.api.get(url).json()
     boletos = Boleto.objects.all()
 
     contexto = {
