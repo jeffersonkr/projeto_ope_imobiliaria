@@ -12,10 +12,81 @@ from core.models.Contrato import Contrato
 from core.models.Imovel import Imovel
 from core.models.Cliente import Cliente
 from core.models.Boleto import Boleto
+from core.models.contato2 import Contato
+from .forms import ContatoForm,AnuncieForm
 
 
 def home(request):
-    return render(request, 'index.html')
+    form = ContatoForm(request.POST, request.FILES or None)
+    
+
+    if form.is_valid():
+        form.save()
+        return redirect('conf')
+    return render(request, 'index.html', {'form': form})
+
+
+def conf(request):
+    return render(request, 'confirma.html')
+
+
+def catalogo(request):
+    url = settings.URL_API + "imovel/"
+    todos_imoveis = requests.api.get(url).json() 
+    
+    contexto = {
+
+        'imoveis': todos_imoveis
+    }
+
+    return render(request, 'catalogo.html', contexto)
+
+
+def anuncie(request):
+    form = AnuncieForm(request.POST, request.FILES or None)
+    
+
+    if form.is_valid():
+        form.save()
+        return redirect('conf')
+    return render(request, 'anuncie.html', {'form': form})
+
+
+def servicos(request):
+    return render(request, 'servicos.html')
+
+
+def sobre(request):
+    return render(request, 'sobre.html')
+
+
+def contato(request):
+    form = ContatoForm(request.POST, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('conf')
+    return render(request, 'contato.html', {'form': form})
+
+
+
+def financiamento(request):
+    return render(request, 'financiamento.html')
+
+
+def corretores(request):
+    url = settings.URL_API + "corretor/"
+    todos_corretores = requests.api.get(url).json()
+
+    print(todos_corretores)
+    context = {
+        'corretores': todos_corretores
+    }
+    return render(request, 'corretores.html', context)
+
+
+def trabalhe(request):
+    return render(request, 'trabalhe.html')
 
 
 def sair(request):

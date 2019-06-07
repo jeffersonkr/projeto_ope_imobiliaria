@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{%load bootstrap %}
 {% load static %}
 {% block content %}
 <body>
@@ -54,9 +54,9 @@
                       <div class="rd-navbar-mobile-brand"><a href="../index.html"><img width='217' height='36' src="{% static 'media/logotipo.png' %}" alt=''/></a></div>
                       <!-- RD Navbar Nav-->
                       <ul class="rd-navbar-nav">
-                        <li class="active"><a href="{% url 'home' %}"><span>Home</span></a>
+                        <li><a href="{% url 'home' %}"><span>Home</span></a>
                         </li>
-                        <li><a href="{% url 'catalogo' %}"><span>Catalogo</span></a>
+                        <li class="active"><a href="{% url 'catalogo' %}"><span>Catalogo</span></a>
                         </li>
                         <li><a href="{% url 'anuncie' %}"><span>Anuncie</span></a>
                         </li>
@@ -296,224 +296,13 @@ Fica a 550m da estação Granja Julieta da CPTM e a 1,8 Km da estação Borba Ga
                 </div>
               </div>
             </div>
-            <div class="offset-top-50"><a class="btn btn-primary" href="catalogo.html">Todos os Imoveis</a></div>
+            
           </div>
         </section>
         <!--Section Real Estate Tools and Resources-->
 
-        <!--Section Real Estate Agents-->
-        <section class="section-98 section-lg-110">
-          <div class="container">
-            <h2 class="font-weight-bold"> Corretores </h2>
-            <hr class="divider bg-saffron">
-            <div class="row justify-content-sm-center offset-top-66">
-              <div class="col-md-6 col-lg-3">
-                <div class="member-block-type-6"><img class="img-fluid d-inline-block" src="{% static 'media/corre3.png' %}" width="270" height="270" alt="">
-                  <div class="text-left offset-top-20">
-                    <div>
-                      <h5 class="font-weight-bold text-primary">Clovis Batista</h5>
-                    </div>
-                  </div>
-                  <address class="contact-info text-left">
-                    <ul class="list-unstyled p">
-                      <li class="d-block">(11) 95990-5569</a>
-                      </li>
-                      <li class="d-block">batista@skimoveis.com.br</span></a>
-                      </li>
-                    </ul>
-                  </address>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-3 offset-top-50 offset-md-top-0">
-                <div class="member-block-type-6"><img class="img-fluid d-inline-block" src="{% static 'media/corretoraa.png' %}" width="270" height="270" alt="">
-                  <div class="text-left offset-top-20">
-                    <div>
-                      <h5 class="font-weight-bold text-primary">Fernanda Marques</h5>
-                    </div>
-                  </div>
-                  <address class="contact-info text-left">
-                    <ul class="list-unstyled p">
-                      <li class="d-block">(11) 96520-445
-                      <li class="d-block">fernanda@skimoveis.com.br</a>
-                      </li>
-                    </ul>
-                  </address>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-3 offset-top-50 offset-lg-top-0">
-                <div class="member-block-type-6"><img class="img-fluid d-inline-block" src="{% static 'media/corre2.png' %}" width="270" height="270" alt="">
-                  <div class="text-left offset-top-20">
-                    <div>
-                      <h5 class="font-weight-bold text-primary">Marcio Ferraz</h5>
-                    </div>
-                  </div>
-                  <address class="contact-info text-left">
-                    <ul class="list-unstyled p">
-                      <li class="d-block">(11) 96425-6602    </li>
-                      <li class="d-block">marcio@skimoveis.com.br   </li>
-                    </ul>
-                  </address>
-                </div>
-              </div>
-            </div>
-            <div class="offset-top-66"><a class="btn btn-primary" href="{% url 'corretores' %}">Sobre os corretores</a></div>
-          </div>
-        </section>
-        <!--Section Testimonials-->
-        <section class="section-98 section-lg-110 bg-lighter">
-          <div class="container">
-            <h2 class="font-weight-bold">O que nossos clientes dizem</h2>
-            <hr class="divider bg-saffron">
-            <div class="offset-top-66">
-              <!-- Testimonials Slider v.4-->
-              <div class="owl-carousel owl-carousel-classic owl-carousel-class-light veil-owl-nav owl-carousel-testimonials-3" data-items="1" data-md-items="2" data-xl-items="3" data-nav="false" data-dots="true" data-margin="50px">
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>Do primeiro dia ate a assinatura do contrato, demostraram extrema seriedade e preocupação com o cliente.</q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Roseli Gonzaga</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>Ótimo atendimento de todos os corretores. Foram muito prestativos, com informações claras e precisas. Atingimos nosso objetivo de forma rápida, através da eficiência do atendimento </q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Miguel da Guerra</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>Queremos agradecer a Imobiliária SkImoveis e a sua equipe de corretores, que ajudaram na venda da nossa casa. Foi um ótimo atendimento. Fizeram uma bela apresentação do imóvel. Nos repassaram muita confiança e segurança na concretização da venda </q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Thiago e Sirlene</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>Adquirimos nosso apartamento, através da Imobiliária SkImoveis uma empresa de confiança. Toda a negociação foi com muita transparência, seriedade 
-                          e acima de tudo um atendimento com muito respeito ao cliente. Agradecemos pelo empenho da equipe Sk, 
-                          em especial a corretora Fernanda pela amizade e dedicação em agradar ao cliente!"
-                          </q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Evelyn</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>A SkImoveis facilitou muito a minha negociação, as outras imobilirias devem seguir o exemplo da SkImoveis</q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Henrique</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-                <div>
-                  <blockquote class="quote quote-slider-4 unit uni-spacing-sm flex-md-row">
-                    
-                    <div class="unit-body text-left">
-                      <div>
-                        <p>
-                          <q>Como cliente há muitos anos parabenizo a SkImoveis pela excelente qualidade e profissionalismo dos serviços prestados! Cliente super satisfeito garante a fidelização!</q>
-                        </p>
-                      </div>
-                      <p class="font-weight-bold quote-author offset-top-10 offset-md-top-4">
-                        <cite class="text-normal">Regina</cite>
-                      </p>
-                    </div>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
-
-
-
-        <!--Section Real Estate Tools and Resources-->
-        <section>
-          <div class="parallax-container" data-parallax-img="images/bg-02-1920x855.jpg">
-            <div class="parallax-content">
-              <div class="container section-98 section-md-110">
-                <h2 class="font-weight-bold">Entre em Contato</h2>
-                <hr class="divider bg-saffron">
-                <div class="row justify-content-sm-center offset-top-66">
-                  <div class="col-md-8">
-                    <!-- RD Mailform-->
-                    <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form|bootstrap }}
-                    
-
-                     <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
-                    
-                      <div class="offset-top-30 text-center">
-                       
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- Page Footers-->
-      <!-- Default footer-->
-      <footer class="section-relative section-top-66 section-bottom-34 page-footer bg-gray-base context-dark">
+    
+     <footer class="section-relative section-top-66 section-bottom-34 page-footer bg-gray-base context-dark">
         <div class="container">
           <div class="row justify-content-md-center text-xl-left">
             <div class="col-md-8 col-lg-12">
@@ -527,14 +316,6 @@ Fica a 550m da estação Granja Julieta da CPTM e a 1,8 Km da estação Borba Ga
                               
                                 <div class="post-title">
                                   <h6 class="text-regular">Cadastre seu e-mail e receba noticias sobre o nosso catalogo </h6>
-                                
-
-
-
-
-
-
-                                
                                 </div>
                               </div>
                             </div></article>
@@ -641,10 +422,4 @@ Fica a 550m da estação Granja Julieta da CPTM e a 1,8 Km da estação Borba Ga
 
 
 
-
-
-
-
-  {% endblock content %}
-
-  
+ {% endblock content %}
