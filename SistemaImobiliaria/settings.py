@@ -166,7 +166,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
 # Api constants
-URL_API = "localhost:8000/api/"
+URL_API = "http://localhost:8000/api/"
 LOGIN_API = "admin"
 PASSWORD_API = "admin"
 
