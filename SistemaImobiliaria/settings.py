@@ -26,6 +26,10 @@ SECRET_KEY = '&y1^tc+2#&nl9!v5bif!ky=@9lsp+g446%@*i8!^e%2-0j$7og'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#configuração RECAPTCHA 
+RECAPTCHA_PRIVATE_KEY = '6LdHk6cUAAAAAA5or-JVTjYnoSuIuWh7kHJWXug5'
+RECAPTCHA_PUBLIC_KEY = '6LdHk6cUAAAAAFZV5ufMIQsVA5fyyXHBhKgbrK9a'
+
 ALLOWED_HOSTS = []
 
 
@@ -42,6 +46,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'api_banco_dado',
     'rest_framework',
+    'bootstrapform',
+    'snowpenguin.django.recaptcha2',
 ]
 
 MIDDLEWARE = [
