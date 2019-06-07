@@ -99,8 +99,9 @@ def registrar(request):
 
 
 def home_sistema(request):
-    url = settings.URL_API + "imovel/"
-    todos_imoveis = requests.api.get(url).json()
+    #url = settings.URL_API + "imovel/"
+    #todos_imoveis = requests.api.get(url).json()
+    todos_imoveis = Imovel.objects.all()
     boletos = Boleto.objects.all()
 
     contexto = {
@@ -171,7 +172,7 @@ def atualizar_view_proprietario(request, pk):
 
 
 def get_token(request):
-    url = settings.URL_API + f"token/"
+    url = settings.URL_API + "token/"
     response = requests.api.post(url, data={
         'username': settings.LOGIN_API,
         'password': settings.PASSWORD_API
