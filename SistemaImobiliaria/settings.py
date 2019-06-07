@@ -24,13 +24,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '&y1^tc+2#&nl9!v5bif!ky=@9lsp+g446%@*i8!^e%2-0j$7og'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #configuração RECAPTCHA 
 RECAPTCHA_PRIVATE_KEY = '6LdHk6cUAAAAAA5or-JVTjYnoSuIuWh7kHJWXug5'
 RECAPTCHA_PUBLIC_KEY = '6LdHk6cUAAAAAFZV5ufMIQsVA5fyyXHBhKgbrK9a'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -150,8 +150,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-ALLOWED_HOSTS = ['*']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # auth
 LOGIN_URL = '/login/'
@@ -167,7 +166,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 
 # Api constants
-URL_API = "http://localhost:8000/api/"
+URL_API = "http://ec2-18-228-220-213.sa-east-1.compute.amazonaws.com:8000/api/"
 LOGIN_API = "admin"
 PASSWORD_API = "admin"
 
